@@ -1,9 +1,36 @@
 import { Button } from '@mui/material';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import "./style.css";
 
 function Login() {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [remember, setRemember] = useState(0);
+    const [item, setItem] = useState({});
+    const navigate = useNavigate();
+    useEffect(() => {
+      if(localStorage.getItem('user-infor')){
+        navigate("/");
+      }   
+    }, [])
+    async function login(){
+        console.log(username, password);
+        let item = {username, password};
+        let res = await fetch("http://localhost:20175/api/user/authenticate",{
+            method:'POST',
+            headers:{
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+            },
+            body:JSON.stringify(item)
+        });
+        res = await res.json();
+        localStorage.setItem("user-infor",JSON.stringify(res));
+        navigate("/");
+        if(!remember)
+            localStorage.removeItem('user-infor');
+    }
     return (
         <div className="login">
             <section className="h-100 bg-dark">
@@ -23,30 +50,30 @@ function Login() {
                                     <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                         <div className="card-body p-4 p-lg-5 text-black">
 
-                                            <form method="post" action="/login">
+                                            <div>
                                                 <h5 className="fw-normal mb-3 pb-3">Đăng nhập vào tài khoản</h5>
                                                 <div className="mb-4">
                                                     <label htmlFor="username" className="form-label">Username hoặc Email</label>
-                                                    <input type="text" className="form-control" id="username" name="username" require="true" />
+                                                    <input onChange={(e)=>setUsername(e.target.value)} type="text" className="form-control" id="username" name="username" require="true" />
                                                 </div>
 
                                                 <div className="mb-4">
                                                     <label htmlFor="password" className="form-label">Mật khẩu</label>
-                                                    <input type="password" className="form-control" id="password" name="password" require="true" />
+                                                    <input type="password" onChange={(e)=>setPassword(e.target.value)} className="form-control" id="password" name="password" require="true" />
                                                 </div>
                                                 <div className="form-check mb-4">
-                                                    <input className="form-check-input" type="checkbox" name="remember_me" id="remember_me" />
+                                                    <input onClick={(e)=>setRemember(e.target.value)} className="form-check-input" type="checkbox" name="remember_me" id="remember_me" />
                                                     <label className="form-check-label" htmlFor="remember_me">
                                                         Ghi nhớ đăng nhập
                                                     </label>
                                                 </div>
                                                 <div className="pt-1 mb-4">
-                                                    <Button variant="contained" type="submit">Đăng nhập</Button>
+                                                    <Button onClick={login} variant="contained" type="submit">Đăng nhập</Button>
                                                 </div>
 
                                                 
 
-                                            </form>
+                                            </div>
 
                                         </div>
                                     </div>
