@@ -3,6 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { configure } from "axios-hooks";
+import axios from "axios";
+import LRU from "lru-cache";
+import { BrowserRouter } from 'react-router-dom';
+axios.defaults.baseURL = "http://localhost:20175/api/"
+const cache = new LRU({ max: 10 });
+configure({ axios, cache })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,8 +1,15 @@
 import { Container, Grid, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import useAxios from 'axios-hooks';
+
 function Hero() {
+    const [{ data, loading, error }] = useAxios(`Address`, {
+    });
+    useEffect(() => {
+    }, [])
+
     return (
         <div >
             <Grid container spacing={2} className="hero">
@@ -92,211 +99,35 @@ function Hero() {
                         </div>
                     </div>
                     <div className="row ">
-                        <div className="col-lg-4 col-md-6 col-12 ">
-                            <div className="single-address wow bounceInLeft ">
-                                <div className="address-image wow bounceInLeft">
-                                    <img src="../images/tour-trong-nuoc/tour-tay-ninh.png" alt="#" />
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="./index_detail.html"> Tây Ninh: Núi Bà Đen - KDL Long Điền Sơn</Link>
-                                    </h4>
-                                    <ul className="review">
 
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star-o" aria-hidden="true"></i></li>
-                                        <li><span>4.0 Review(s)</span></li>
-                                    </ul>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address wow bounceInLeft">
-                                <div className="address-image wow bounceInLeft">
-                                    <img src="../images/tour-trong-nuoc/tour-chau-doc.png" alt="#" />
-                                    <span className="sale-tag">HOT</span>
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">An Giang: Núi Cấm - Núi Sam - Chợ Tịnh Biên</Link>
-                                    </h4>
-                                    <ul className="review">
-
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star-o" aria-hidden="true"></i></li>
-                                        <li><span>4.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address">
-                                <div className="address-image wow bounceInLeft">
-                                    <img src="../images/tour-trong-nuoc/tour-ninh-binh.png" alt="#" />
-                                    <span className="sale-tag">HOT</span>
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">Ninh Bình: Chùa Tam Chúc - Tràng An</Link>
-                                    </h4>
-                                    <ul className="review">
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><span>5.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address">
-                                <div className="address-image wow bounceInLeft">
-                                    <img src="../images/tour-trong-nuoc/tour-nha-trang.png" alt="#" />
-                                    <span className="new-tag">New</span>
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">Nha Trang: Trải Nghiệm Bắn Cá - Ngắm San Hô</Link>
-                                    </h4>
-                                    <ul className="review">
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><span>5.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address">
-                                <div className="address-image wow bounceInLeft">
-                                    <img src="../images/tour-trong-nuoc/tour-moc-chau.png" alt="#" />
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">Mộc Châu: Khám Phá Thác Chiềng Khoa</Link>
-                                    </h4>
-                                    <ul className="review">
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><span>5.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address">
-                                <div className="address-image wow bounceInLeft">
-                                    <img src="../images/tour-trong-nuoc/tour-tay-ninh.png" alt="#" />
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="./index_detail.html">Tour Tây Ninh: Núi Bà Đen - KDL Long Điền Sơn</Link>
-                                    </h4>
-                                    <ul className="review">
-
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star-o" aria-hidden="true"></i></li>
-                                        <li><span>4.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address">
-                                <div className="address-image wow rotateIn">
-                                    <img src="../images/tour-trong-nuoc/tour-chau-doc.png" alt="#" />
-                                    <span className="sale-tag">-25%</span>
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước 1 đêm</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">Tour Châu Đốc: Núi Cấm - Núi Sam - Chợ Tịnh Biên</Link>
-                                    </h4>
-                                    <ul className="review">
-
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star-o" aria-hidden="true"></i></li>
-                                        <li><span>4.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address wow rotateIn">
-                                <div className="address-image">
-                                    <img src="../images/tour-trong-nuoc/tour-ninh-binh.png" alt="#" />
-                                    <span className="sale-tag">-15%</span>
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">Tour Ninh Bình: Chùa Tam Chúc - Tràng An</Link>
-                                    </h4>
-                                    <ul className="review">
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><span>5.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-4 col-md-6 col-12">
-                            <div className="single-address">
-                                <div className="address-image wow slideInLeft" data-wow-duration="12s" data-wow-delay="15s">
-                                    <img src="../images/tour-trong-nuoc/tour-ninh-binh.png" alt="#" />
-                                    <span className="sale-tag">-15%</span>
-                                </div>
-                                <div className="address-info">
-                                    <span className="category">Trong nước</span>
-                                    <h4 className="title">
-                                        <Link to="address-grids.html">Tour Ninh Bình: Chùa Tam Chúc - Tràng An</Link>
-                                    </h4>
-                                    <ul className="review">
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><i className="fa fa-star" aria-hidden="true"></i></li>
-                                        <li><span>5.0 Review(s)</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        {
+                            data && data.map(({ diadiem_ten, danhgia, index }) => {
+                                return (
+                                    <div className="col-lg-4 col-md-6 col-12 ">
+                                        <div key={index} className="single-address wow bounceInLeft ">
+                                            <div className="address-image wow bounceInLeft">
+                                                <img src="/images/tour-trong-nuoc/tour-tay-ninh.png" alt="#" />
+                                            </div>
+                                            <div className="address-info">
+                                                <span className="category">Trong nước</span>
+                                                <h4 className="title">
+                                                    <Link to="./index_detail.html"> {diadiem_ten}</Link>
+                                                </h4>
+                                                <ul className="review">
+                                                {danhgia&& danhgia.map(({danhgia_sao, key})=>{
+                                                    return (<ul>{Array.from(Array(Number(danhgia_sao)), (e, i) => {return <li><i key={i} className="fa fa-star" aria-hidden="true"></i></li>  })}{Array.from(Array(5-Number(danhgia_sao)), (e, i) => {return <li><i key={i} className="fa fa-star-o" aria-hidden="true"></i></li>  })}<li key={key}><span>{danhgia_sao}.0 Review(s)</span></li></ul>)
+                                                })}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>);
+                            })
+                        }
                     </div>
                 </div>
-            </section>
-            
-        </div>
+            </section >
+
+        </div >
 
     )
 }

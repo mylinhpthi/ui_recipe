@@ -1,6 +1,11 @@
-import React from 'react'
+import React,{ useEffect, useState }  from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 function Header() {
-
+	var item =localStorage.getItem('user');
+	const logout =(e) =>{
+		localStorage.removeItem('user');
+		localStorage.removeItem('remember');
+	}
 	return (
 			<section className="header ftco-section">
 				<div className="header container-fluid px-md-5">
@@ -12,11 +17,26 @@ function Header() {
 								</div>
 								<div className="col-md-6 d-md-flex justify-content-end mb-md-0">
 									<div className="social-media">
+										{!item&&
+										(
 										<p className="mb-0 d-flex">  <b className=" my-2">Đăng nhập với: </b>
 											<a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-facebook"><i className="sr-only">Facebook</i></span></a>
 											<a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-google"><i className="sr-only">Google</i></span></a>
 											<a href="/login" className="d-flex align-items-center justify-content-center"><span className="fa fa-key"><i className="sr-only">Tài khoản account</i></span></a>
 										</p>
+										)
+
+										}
+										{item&&
+										(
+										<p className="mb-0 d-flex"> 
+											<a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-user-md"><i className="sr-only">Profile</i></span></a>
+											<a href="/login" onClick={logout} className="d-flex align-items-center justify-content-center"><span className="fa fa-sign-out"><i className="sr-only">Đăng xuất</i></span></a>
+											</p>
+										)
+										
+										}
+										
 									</div>
 								</div>
 							</div>
