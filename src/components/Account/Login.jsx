@@ -1,9 +1,9 @@
 import { Button } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import "./style.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCookies } from 'react-cookie';
 toast.configure();
 
 function Login() {
@@ -11,15 +11,14 @@ function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [remember, setRemember] = useState(0);
-    const [item, setItem] = useState({});
     const navigate = useNavigate();
     useEffect(() => {
-        if (localStorage.getItem('remember')) {
+        if (!!cookies.user || localStorage.getItem('user')) {
             navigate("/");
         }
     }, [])
+    const [cookies, setCookie] = useCookies(['user']);
     async function login() {
-        console.log(username, password);
         let item = { username, password };
         let res = await fetch("http://localhost:20175/api/user/authenticate", {
             method: 'POST',
@@ -32,9 +31,10 @@ function Login() {
         res = await res.json();
         if (res.token != null) {
             localStorage.setItem("user", JSON.stringify(res.tk.username));
+            window.location.reload();
             navigate("/");
             if (remember)
-            localStorage.setItem("remember", JSON.stringify(res));
+            setCookie("user", username,3)
         }
         else {
             toast.error('Đăng nhập không thành công. Vui lòng thử lại!')

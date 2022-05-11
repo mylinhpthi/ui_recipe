@@ -1,10 +1,13 @@
 import React,{ useEffect, useState }  from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 function Header() {
-	var item =localStorage.getItem('user');
+	var items = !!(localStorage.getItem('user'));
+	useEffect(() => {
+	}, [])
 	const logout =(e) =>{
+		e.preventDefault();
 		localStorage.removeItem('user');
-		localStorage.removeItem('remember');
+		window.location.reload();
 	}
 	return (
 			<section className="header ftco-section">
@@ -17,7 +20,7 @@ function Header() {
 								</div>
 								<div className="col-md-6 d-md-flex justify-content-end mb-md-0">
 									<div className="social-media">
-										{!item&&
+										{(items==false)&&
 										(
 										<p className="mb-0 d-flex">  <b className=" my-2">Đăng nhập với: </b>
 											<a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-facebook"><i className="sr-only">Facebook</i></span></a>
@@ -27,7 +30,7 @@ function Header() {
 										)
 
 										}
-										{item&&
+										{(items==true)&&
 										(
 										<p className="mb-0 d-flex"> 
 											<a href="#" className="d-flex align-items-center justify-content-center"><span className="fa fa-user-md"><i className="sr-only">Profile</i></span></a>
@@ -71,7 +74,15 @@ function Header() {
 									</div>
 								</li>
 								<li className="nav-item"><a href="#" className="nav-link">Feedback</a></li>
-								<li className="nav-item"><a href="#" className="nav-link">Liên hệ</a></li>
+								<li className="nav-item dropdown category">
+									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Dịch vụ</a>
+									<div className="dropdown-menu category-dropdown-menu" >
+										<a className="dropdown-item" href="#">Quản lý quỹ VFC</a>
+										<a className="dropdown-item" href="#">Quản lý địa điểm</a>
+										<a className="dropdown-item" href="#">Di tích lịch sử</a>
+										<a className="dropdown-item" href="#">Check in và phiêu lưu</a>
+									</div>
+								</li>
 								<li className="nav-item"><a href="#" className="nav-link">Về chúng tôi</a></li>
 							</ul>
 						</div>

@@ -8,6 +8,10 @@ import Footer from './components/Partial/Footer';
 import Hero from './components/Home/Hero';
 import Login from './components/Account/Login';
 import Register from './components/Account/Register';
+import AddAddress from './components/Address/AddAddress';
+import AddressDetail from './components/Address/AddressDetail';
+import EditAddress from './components/Address/EditAddress';
+import ListAddress from './components/Address/ListAddress';
 const theme = createTheme({
   palette: {
     primary: {
@@ -32,6 +36,10 @@ function App() {
             <Route exact path="/" element={<Hero />}/>
             <Route path="/login" element={<Login />}/>
             <Route path="/register" element={<Register />}/>
+            <Route path="/address/list" element={<ListAddress />}/>
+            <Route path="/address/add" element={<AddAddress />}/>
+            <Route path="/address/:id" element={<AddressDetail />}/>
+            <Route path="/address/:id/edit" element={<EditAddress />}/>
           </Routes>
         </Router>
         <Footer />

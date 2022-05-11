@@ -52,7 +52,6 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
       body: JSON.stringify(item)
     });
     res = await res.json();
-     localStorage.setItem("userout", JSON.stringify(res));
       toast.success('Đăng ký thành công. Đăng nhập lại nhé!')
       navigate("/login");
   }

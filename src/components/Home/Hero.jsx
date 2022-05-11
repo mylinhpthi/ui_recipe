@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import useAxios from 'axios-hooks';
 
 function Hero() {
+    const [dt, setDt] = useState([]);
     const [{ data, loading, error }] = useAxios(`Address`, {
     });
     useEffect(() => {
-    }, [])
+        setDt(data);
+    }, [data])
 
     return (
         <div >
@@ -57,7 +59,7 @@ function Hero() {
                                 được trưng bày. Nhà cổ Bình Thủy cũng là điểm đến hấp dẫn du khách với những góc sống ảo tuyệt
                                 đẹp. Trong đó, góc chụp đẹp nhất tại ngôi nhà cổ này đó là ngoài trời với khu vườn hoa nở rực rỡ
                                 sắc màu.</div>
-                            <button type="button" className="btn btn-secondary"><span>Khám phá ngay</span> </button>
+                                <button type="button" className="btn btn-secondary"><Link to="#">Khám phá ngay</Link> </button>
                         </div>
                     </div>
                     <div className="carousel-item home-carousel-item">
@@ -66,7 +68,7 @@ function Hero() {
                             <div className="caption">Chùa Ông là địa điểm sống ảo đẹp ở Cần Thơ ấn tượng với lối thiết kế đậm chất
                                 Trung Hoa. Tổng thể ngôi chùa có kiến trúc theo thuyết âm dương, với tượng vật linh thiêng, cá
                                 chép hóa rồng, linh phụng...</div>
-                            <button type="button" className="btn btn-secondary"><span>Khám phá ngay</span> </button>
+                                <button type="button" className="btn btn-secondary"><Link to="#">Khám phá ngay</Link> </button>
                         </div>
                     </div>
                     <div className="carousel-item home-carousel-item">
@@ -77,7 +79,7 @@ function Hero() {
                                 cây Ba Cống, vườn trái cây 9 Hồng,... Bạn sẽ được đi dạo xung quanh miệt vườn ngắm đủ loại trái
                                 cây miền Tây đặc sản như chôm chôm, nhãn, sầu riêng, măng cụt, mận.
                                 .</p>
-                            <button type="button" className="btn btn-secondary"><span>Khám phá ngay</span> </button>
+                                <button type="button" className="btn btn-secondary"><Link to="#">Khám phá ngay</Link> </button>
                         </div>
                     </div>
                 </div>
@@ -88,41 +90,96 @@ function Hero() {
                     <span className="carousel-control-next-icon"></span>
                 </button>
             </div>
-            <section className="address section">
+            <section className="address section" id='diadiem'>
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
                             <div className="section-title">
                                 <h2>Khu văn hóa & lịch sử</h2>
-                                <Link to="#"><span>Xem thêm</span> </Link>
+                                <Link to="/address/list"><span>Xem thêm</span> </Link>
                             </div>
                         </div>
                     </div>
                     <div className="row ">
-
                         {
-                            data && data.map(({ diadiem_ten, danhgia, index }) => {
+                            dt && dt.slice(0,7).map(({ id_diadiem, diadiem_ten, danhgia, hinhanhs, index }) => {
                                 return (
-                                    <div className="col-lg-4 col-md-6 col-12 ">
-                                        <div key={index} className="single-address wow bounceInLeft ">
-                                            <div className="address-image wow bounceInLeft">
-                                                <img src="/images/tour-trong-nuoc/tour-tay-ninh.png" alt="#" />
+
+                                    <div className="col-lg-3 col-md-6 col-12 ">
+                                        <Link to={'/Address/' + id_diadiem}>
+                                            <div key={index} className="single-address wow bounceInLeft ">
+                                                <div className="address-image wow bounceInLeft">
+                                                    <img src={hinhanhs[0] && hinhanhs[0].hinhanh_url} alt="#" />
+                                                </div>
+                                                <div className="address-info">
+                                                    <span className="category">Trong nước</span>
+                                                    <h6 className="title">
+                                                        {diadiem_ten}
+                                                    </h6>
+                                                        {danhgia && danhgia.map(({ danhgia_sao, key }) => {
+                                                            return (<ul className="review" key={key}>{Array.from(Array(Number(danhgia_sao)), (e, i) => { return <li><i key={i} className="fa fa-star" aria-hidden="true"></i></li> })}{Array.from(Array(5 - Number(danhgia_sao)), (e, i) => { return <li><i key={i} className="fa fa-star-o" aria-hidden="true"></i></li> })}<li ><span>{danhgia_sao}.0 Review(s)</span></li></ul>)
+                                                        })}
+                                                        {!danhgia&&(
+                                                            <ul className="review">
+                                                            <li>
+                                                                <i className="fa fa-star" aria-hidden="true"></i>
+                                                            </li> 
+                                                            <li>
+                                                                <i className="fa fa-star" aria-hidden="true"></i>
+                                                            </li> 
+                                                            <li>
+                                                                <i className="fa fa-star" aria-hidden="true"></i>
+                                                            </li> 
+                                                            <li>
+                                                                <i className="fa fa-star" aria-hidden="true"></i>
+                                                            </li> 
+                                                            <li>
+                                                                <i className="fa fa-star" aria-hidden="true"></i>
+                                                            </li> 
+                                                            <li ><span>5.0 Review(s)</span></li>
+                                                            </ul>
+                                                        )}
+                                                     
+
+                                                </div>
                                             </div>
-                                            <div className="address-info">
-                                                <span className="category">Trong nước</span>
-                                                <h4 className="title">
-                                                    <Link to="./index_detail.html"> {diadiem_ten}</Link>
-                                                </h4>
-                                                <ul className="review">
-                                                {danhgia&& danhgia.map(({danhgia_sao, key})=>{
-                                                    return (<ul>{Array.from(Array(Number(danhgia_sao)), (e, i) => {return <li><i key={i} className="fa fa-star" aria-hidden="true"></i></li>  })}{Array.from(Array(5-Number(danhgia_sao)), (e, i) => {return <li><i key={i} className="fa fa-star-o" aria-hidden="true"></i></li>  })}<li key={key}><span>{danhgia_sao}.0 Review(s)</span></li></ul>)
-                                                })}
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        </Link>
                                     </div>);
                             })
                         }
+                        <div className="col-lg-3 col-md-6 col-12 ">
+                                        <Link to="/Address/add">
+                                            <div className="single-address wow bounceInLeft ">
+                                                <div className="address-image wow bounceInLeft container">
+                                                    <img className="mx-1 my-1 py-3 px-3" src="/images/address/add.png" alt="#" />
+                                                </div>
+                                                <div className="address-info">
+                                                    <span className="category">**** nước</span>
+                                                    <h6 className="title">
+                                                         Địa điểm mới của bạn
+                                                    </h6>
+                                                    <ul className="review">
+                                                    <li>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                    </li> 
+                                                    <li>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                    </li> 
+                                                    <li>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                    </li> 
+                                                    <li>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                    </li> 
+                                                    <li>
+                                                        <i className="fa fa-star" aria-hidden="true"></i>
+                                                    </li> 
+                                                    <li ><span>5.0 Review(s)</span></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    </div> 
                     </div>
                 </div>
             </section >
