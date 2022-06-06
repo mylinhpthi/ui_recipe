@@ -330,7 +330,7 @@ a:not([href]):not([tabindex]):focus {
   }
 }
 
-.social-media p a {
+.social-media .log-btn a, .social-media .signIn div {
   border: 1px solid #e6e6e6;
   width: 40px;
   height: 40px;
@@ -339,11 +339,11 @@ a:not([href]):not([tabindex]):focus {
   background-color: #fff;
 }
 
-.social-media p {
+.social-media .log-btn {
   margin: auto;
 }
 
-.social-media p b {
+.social-media .log-btn b {
   margin-right: 20px;
   font-weight: 400;
   text-align: center;
@@ -360,16 +360,16 @@ a:not([href]):not([tabindex]):focus {
   display: block;
 }
 
-.social-media p a span {
+.social-media .log-btn a span {
   color: #4d4d4d;
 }
 
-.social-media p a:hover {
+.social-media .log-btn a:hover {
   background: #ff0000;
   border-color: #ff0000;
 }
 
-.social-media p a:hover span {
+.social-media .log-btn a:hover span {
   color: #fff;
 }
 
