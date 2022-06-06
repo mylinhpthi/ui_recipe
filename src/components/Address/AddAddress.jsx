@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 import useAxios from 'axios-hooks';
+import Map from '../Partial/Map';
 
 function AddAddress() {
     const notify = () => toast('');
@@ -44,12 +45,11 @@ function AddAddress() {
 
     return (
         <section className="h-100 bg-dark">
-            <div className="container 2 h-100">
+            <div className="container h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-xl-10">
-                        <div className="card" >
+                        <div className="card p-4" >
                             <div className="row g-0">
-
                                 <div className="col-md-6 col-lg-5 d-none d-md-block">
                                     <nav aria-label="breadcrumb" className='mt-4 mx-3'>
                                         <ol className="breadcrumb">
@@ -58,13 +58,39 @@ function AddAddress() {
                                             <li className="breadcrumb-item active" aria-current="page">Thêm địa điểm</li>
                                         </ol>
                                     </nav>
-                                    <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid ms-5 mt-1" />
-                                    <div className="sub-login">
-                                        <p className="mb-5 pb-lg-2" >Hủy bỏ thao tác? <Link to="/" className='underline' >Quay về trang chủ </Link></p>
+                                    <div className="mb-4 div-fluid pt-3">
+                                        <div className="list-img">
+                                            <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid mt-1" />
+                                            <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid mt-1" />
+                                            <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid mt-1" />
+                                        </div>
+                                        <input type="file" name="file" id="file" className="inputfile" />
+                                        <label htmlFor="file">Tải hình ảnh lên</label>
                                     </div>
+                                    <div className="mt-4 d-flex justify-content-between">
+                                        <label htmlFor="vitri" className="form-label">Vị trí:</label>
+                                        <button className="btn btn-outline-darks underline" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Chọn ngay</button>
+                                        <div className="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabIndex="-1">
+                                            <div className="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+                                                <div className="modal-content">
+                                                    <div className="modal-header">
+                                                        <h5 className="modal-title" id="exampleModalToggleLabel2">Bản đồ Việt Nam</h5>
+                                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div className="modal-body">
+                                                        <Map />
+                                                    </div>
+                                                    <div className="modal-footer">
+                                                        <button className="btn btn-outlined-dark" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
                                 </div>
                                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
-                                    <div className="card-body p-4 p-lg-5 text-black">
+                                    <div className="card-body pt-5 text-black">
                                         <div>
                                             <div className="mb-2">
                                                 <label htmlFor="username" className="form-label">Danh mục địa điểm:</label>
@@ -82,33 +108,25 @@ function AddAddress() {
                                                 <input type="text" onChange={(e) => setDiadiem_ten(e.target.value)} className="form-control" id="username" name="username" require="true" />
                                             </div>
 
-                                            <div className="mb-2">
+                                            <div>
                                                 <label htmlFor="url" className="form-label">Url:</label>
                                                 <input type="url" onChange={(e) => setDiadiem_url(e.target.value)} className="form-control" id="url" name="url" require="true" />
-                                            </div>
-                                            <div className="mb-2">
-                                                <label htmlFor="vitri" className="form-label">Vị trí:</label>
-                                                <div className="input-group mb-3" id="vitri">
-                                                    <input type="number" onChange={(e) => setDiadiem_kinhdo(e.target.value)} placeholder='Kinh độ' className="form-control me-2" id="kinhdo" name="kinhdo" require="true" />
-                                                    <input type="number" placeholder='Vĩ độ' onChange={(e) => setDiadiem_vido(e.target.value)} className="form-control" id="vido" name="vido" require="true" />
-                                                </div>
-
-                                            </div>
-                                            <div className="mb-2">
-                                                <label htmlFor="mota" className="form-label">Mô tả:</label>
-                                                <input type="text" onChange={(e) => setDiadiem_mota(e.target.value)} className="form-control" id="mota" name="mota" require="true" />
-                                            </div>
-                                            <div className="mb-2">
-                                                <label htmlFor="hinhanh" className="form-label">Ảnh:</label>
-                                                <input type="text" className="form-control" onChange={(e) => setHinhAnhURL(e.target.value)} id="hinhanh" name="hinhanh" require="true" />
-                                            </div>
-                                            <div className="pt-1 mb-2">
-                                                <Button onClick={add} variant="contained" type="submit">Xác nhận  </Button>
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
+
+                                <div className="mb-2">
+                                    <label htmlFor="mota" className="form-label">Vui lòng nhập thông chi tiết về địa điểm của bạn:</label>
+                                    <textarea rows="8" onChange={(e) => setDiadiem_mota(e.target.value)} className="form-control" id="mota" name="mota" require="true" />
+                                </div>
+                                <div className="pt-1 mb-2 d-flex justify-content-between">
+                                    <Button onClick={add} variant="contained" type="submit">Xác nhận  </Button> 
+                                    <p className=" pb-lg-2" >Hủy bỏ thao tác? <Link to="/" className='underline' >Quay về trang chủ </Link></p>
+                                 
+                                </div>
+
                             </div>
                         </div>
                     </div>
