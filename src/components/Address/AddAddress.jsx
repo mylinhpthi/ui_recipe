@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useCookies } from 'react-cookie';
 import useAxios from 'axios-hooks';
 import Map from '../Partial/Map';
+import UploadImages from '../Partial/UploadImages';
 
 function AddAddress() {
     const notify = () => toast('');
@@ -15,11 +16,24 @@ function AddAddress() {
     const [diadiem_vido, setDiadiem_vido] = useState(0);
     const [diadiem_mota, setDiadiem_mota] = useState("");
     const [danhmucId, setDanhmucId] = useState("");
+    const [hinhanh, setHinhanh] = useState([]);
     const navigate = useNavigate();
-    const [hinhanh_url, setHinhAnhURL] = useState();
     var today = new Date();
+    var i = 0;
+    const [url, setImageURL] = useState([]);
+
     const [{ data: category, loading: cLoading, error: CError }] = useAxios(`Category`);
-    const hinhanh = [{ hinhanh_mota: diadiem_ten, hinhanh_url }];
+    async function getBase64(file) {
+        let baseURL = "";
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            console.log("Called", reader);
+            baseURL = reader.result;
+            hinhanh.push(baseURL);
+        };
+        await setHinhanh(hinhanh);
+    };
 
     async function add() {
         let danhmuc = {};
@@ -29,45 +43,40 @@ function AddAddress() {
             }
         }
         let item = { danhmuc, diadiem_ten, diadiem_url, diadiem_kinhdo, diadiem_vido, diadiem_mota, diadiem_created: today, diadiem_updated: today, hinhanhs: hinhanh };
-
-        let res = await fetch("http://localhost:20175/api/Address", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/jsxon"
-            },
-            body: JSON.stringify(item)
-        });
-        res = await res.json();
+        // localStorage.setItem("key", JSON.stringify(item));
+        console.log(JSON.stringify(item))
+        console.log(hinhanh);
         toast.success('Thêm địa điểm thành công!')
-        navigate("/");
     }
-
+    async function changeFormat(files){
+        for (let i = 0; i < files.length; i++) {
+            getBase64(files[i])
+        }
+        add();
+    }
+    async function handleChange(files){
+        setImageURL(files);     
+    };
     return (
         <section className="h-100 bg-dark">
+
             <div className="container h-100">
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col col-xl-10">
                         <div className="card p-4" >
                             <div className="row g-0">
                                 <div className="col-md-6 col-lg-5 d-none d-md-block">
-                                    <nav aria-label="breadcrumb" className='mt-4 mx-3'>
+                                    <nav aria-label="breadcrumb" className='mt-2 mx-3'>
                                         <ol className="breadcrumb">
                                             <li className="breadcrumb-item"><a href="/">Trang chủ</a></li>
                                             <li className="breadcrumb-item"><a href="/address/list">Địa điểm</a></li>
                                             <li className="breadcrumb-item active" aria-current="page">Thêm địa điểm</li>
                                         </ol>
                                     </nav>
-                                    <div className="mb-4 div-fluid pt-3">
-                                        <div className="list-img">
-                                            <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid mt-1" />
-                                            <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid mt-1" />
-                                            <img src="/images/address/addAddress.svg" alt="login form" className="img-fluid mt-1" />
-                                        </div>
-                                        <input type="file" name="file" id="file" className="inputfile" />
-                                        <label htmlFor="file">Tải hình ảnh lên</label>
+                                    <div className="mb-4 div-fluid">
+                                        <UploadImages url={url} handleChange={handleChange} />
                                     </div>
-                                    <div className="mt-4 d-flex justify-content-between">
+                                    <div className="mt-5 d-flex justify-content-between">
                                         <label htmlFor="vitri" className="form-label">Vị trí:</label>
                                         <button className="btn btn-outline-darks underline" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Chọn ngay</button>
                                         <div className="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabIndex="-1">
@@ -87,7 +96,7 @@ function AddAddress() {
                                             </div>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div className="card-body pt-5 text-black">
@@ -122,9 +131,9 @@ function AddAddress() {
                                     <textarea rows="8" onChange={(e) => setDiadiem_mota(e.target.value)} className="form-control" id="mota" name="mota" require="true" />
                                 </div>
                                 <div className="pt-1 mb-2 d-flex justify-content-between">
-                                    <Button onClick={add} variant="contained" type="submit">Xác nhận  </Button> 
+                                    <Button onClick={changeFormat()} variant="contained" type="submit">Xác nhận  </Button>
                                     <p className=" pb-lg-2" >Hủy bỏ thao tác? <Link to="/" className='underline' >Quay về trang chủ </Link></p>
-                                 
+
                                 </div>
 
                             </div>
@@ -132,6 +141,10 @@ function AddAddress() {
                     </div>
                 </div>
             </div>
+
+            {!!hinhanh && hinhanh.map((link, key) =>
+                <img src={link} alt="AAAA" key={key} />
+            )}
         </section>
     )
 }
