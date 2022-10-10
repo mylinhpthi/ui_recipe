@@ -6,7 +6,9 @@ import { createTheme } from "@mui/material/styles";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Header from "./components/Partial/Header";
 import Footer from "./components/Partial/Footer";
+
 import Hero from "./components/Home/Hero";
+import Example from "./components/Home/Example";
 import Login from "./components/Account/Login";
 import Register from "./components/Account/Register";
 import AddAddress from "./components/Address/AddAddress";
@@ -22,14 +24,14 @@ import Map from "./components/Partial/Map";
 const theme = createTheme({
   palette: {
     primary: {
-      light: "#ff5131",
-      main: "#d50000",
-      dark: "#9b0000",
+      light: "#B2FF59",
+      main: "#54b902 ",
+      dark: "#64DD17",
     },
     secondary: {
-      light: "#ffffff",
-      main: "#e0f2f1",
-      dark: "#aebfbe",
+      light: "#FFD600",
+      main: "#FFEA00",
+      dark: "#FFFF00",
     },
   },
 });
@@ -81,8 +83,8 @@ function App() {
             </Router>
             <Router>
               <Routes>
-                {/* <Route exact path="/" element={<Hero />} /> */}
-                <Route exact path="/" element={<Map />} />
+                <Route exact path="/" element={<Hero />} />
+                {/* <Route exact path="/" element={<Map />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/address/list" element={<ListAddress />} />

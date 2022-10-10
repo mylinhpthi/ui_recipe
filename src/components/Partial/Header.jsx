@@ -18,7 +18,7 @@ function Header() {
 						<div className="col-md-8 order-md-last">
 							<div className="row">
 								<div className="col-md-6 text-center">
-									<a className="navbar-brand" href="index.html">Chill Garden <span>Sẵn sàng phục vụ và giúp đỡ bạn</span></a>
+									<a className="navbar-brand" href="index.html">HAPPY FOOD <span>Sẵn sàng bên cạnh và giúp đỡ bạn</span></a>
 								</div>
 								<div className="col-md-6 d-md-flex justify-content-end mb-md-0">
 									<div className="social-media">
@@ -70,20 +70,23 @@ function Header() {
 								<li className="nav-item dropdown category">
 									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Danh mục</a>
 									<div className="dropdown-menu category-dropdown-menu" >
-										<a className="dropdown-item" href="#">Địa điểm siêu HOT</a>
-										<a className="dropdown-item" href="#">Danh lam thắng cảnh</a>
-										<a className="dropdown-item" href="#">Di tích lịch sử</a>
-										<a className="dropdown-item" href="#">Check in và phiêu lưu</a>
+										<a className="dropdown-item" href="/address/list">Đồ chiên/rán/nướng</a>
+										<a className="dropdown-item" href="/address/list">Đồ ăn vặt</a>
+										<a className="dropdown-item" href="/address/list">Thức ăn nhanh</a>
+										<a className="dropdown-item" href="/address/list">Món ăn nước</a>
+										<a className="dropdown-item" href="/address/list">Thực đơn Healthy</a>
+										<a className="dropdown-item" href="/address/list">Khác</a>
 									</div>
 								</li>
+								<li className="nav-item"><a href="#" className="nav-link">Món ăn ngon</a></li>
 								<li className="nav-item"><a href="#" className="nav-link">Feedback</a></li>
 								<li className="nav-item dropdown category">
-									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Dịch vụ</a>
+									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Tin tức</a>
 									<div className="dropdown-menu category-dropdown-menu" >
-										<a className="dropdown-item" href="#">Quản lý quỹ VFC</a>
-										<a className="dropdown-item" href="#">Quản lý địa điểm</a>
-										<a className="dropdown-item" href="#">Di tích lịch sử</a>
-										<a className="dropdown-item" href="#">Check in và phiêu lưu</a>
+										<a className="dropdown-item" href="#">Giảm cân Healthy với Granola</a>
+										<a className="dropdown-item" href="#">Ăn sáng ngon miệng bằng súp </a>
+										<a className="dropdown-item" href="#">Top những mâm cơm gia đình hạnh phúc</a>
+										<a className="dropdown-item" href="#">Bí quyết của hạnh phúc: "Yêu từ dạ dày"</a>
 									</div>
 								</li>
 								<li className="nav-item"><a href="#" className="nav-link">Về chúng tôi</a></li>

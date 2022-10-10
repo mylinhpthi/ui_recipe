@@ -112,7 +112,7 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
                         </div>
                     </div>
                     <div className=" d-flex justify-content-start ">
-                      <Button onClick={registers} variant="contained" type="submit">Đăng ký</Button>
+                      <Button onClick={registers} variant="contained" type="submit"><span class="p-custome" >Đăng ký</span></Button>
                     </div>
 
                   </div>

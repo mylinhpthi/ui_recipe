@@ -77,7 +77,7 @@ function Login() {
                                                     </label>
                                                 </div>
                                                 <div className="pt-1 mb-4">
-                                                    <Button onClick={login} variant="contained" type="submit">Đăng nhập</Button>
+                                                    <Button onClick={login} variant="contained" type="submit"><span class="p-custome" >Đăng nhập</span></Button>
                                                 </div>
                                             </div>
 
