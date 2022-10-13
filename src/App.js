@@ -21,6 +21,9 @@ import { AppContext } from "./AppContext";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Map from "./components/Partial/Map";
+import ListRecipe from "./components/Recipe/RecipeList";
+import RecipeDetail from "./components/Recipe/RecipeDetail";
+import RecipeAdd from "./components/Recipe/RecipeAdd";
 const theme = createTheme({
   palette: {
     primary: {
@@ -87,10 +90,10 @@ function App() {
                 {/* <Route exact path="/" element={<Map />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
-                <Route path="/address/list" element={<ListAddress />} />
-                <Route path="/address/add" element={<AddAddress />} />
-                <Route path="/address/:id" element={<AddressDetail />} />
-                <Route path="/address/:id/edit" element={<EditAddress />} />
+                <Route path="/recipe/list" element={<ListRecipe />} />
+                <Route path="/recipe/add" element={<RecipeAdd />} />
+                <Route path="/recipe/list/:id" element={<RecipeDetail />} />
+                {/* <Route path="/recipe/:id/edit" element={<Editrecipe />} /> */}
               </Routes>
             </Router>
             <Footer />

@@ -20,7 +20,7 @@ function Login() {
     const [cookies, setCookie] = useCookies(['user']);
     async function login() {
         let item = { username, password };
-        let res = await fetch("http://localhost:20175/api/user/authenticate", {
+        let res = await fetch("http://localhost:8093/authenticate", {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -30,7 +30,7 @@ function Login() {
         });
         res = await res.json();
         if (res.token != null) {
-            localStorage.setItem("user", JSON.stringify(res.tk.username));
+            localStorage.setItem("user", JSON.stringify(res.username));
             window.location.reload();
             navigate("/");
             if (remember)

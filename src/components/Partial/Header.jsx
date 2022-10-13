@@ -2,10 +2,16 @@ import React,{ useEffect, useState, useContext }  from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import SignInButtons from '../Account/SignInButtons';
 import { AppContext } from "../../AppContext";
+import useAxios from 'axios-hooks';
+
 function Header() {
+	const [dt, setDt] = useState([]);
+	const [{ data, loading, error }] = useAxios(`category/list`, {});
 	var items = !!(localStorage.getItem('user'));
 	useEffect(() => {
-	}, [])
+		setDt(data);
+		console.log(data);
+	  }, [data]);
 	const logout =(e) =>{
 		e.preventDefault();
 		localStorage.removeItem('user');
@@ -70,12 +76,11 @@ function Header() {
 								<li className="nav-item dropdown category">
 									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Danh mục</a>
 									<div className="dropdown-menu category-dropdown-menu" >
-										<a className="dropdown-item" href="/address/list">Đồ chiên/rán/nướng</a>
-										<a className="dropdown-item" href="/address/list">Đồ ăn vặt</a>
-										<a className="dropdown-item" href="/address/list">Thức ăn nhanh</a>
-										<a className="dropdown-item" href="/address/list">Món ăn nước</a>
-										<a className="dropdown-item" href="/address/list">Thực đơn Healthy</a>
-										<a className="dropdown-item" href="/address/list">Khác</a>
+									{dt && dt.map(({ id, name, index }) => {
+                                return (
+									<a key={id} className="dropdown-item" href="/recipe/list">{name}</a>
+								)})}
+										<a className="dropdown-item" href="/recipe/list">Khác</a>
 									</div>
 								</li>
 								<li className="nav-item"><a href="#" className="nav-link">Món ăn ngon</a></li>

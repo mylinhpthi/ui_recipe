@@ -42,7 +42,7 @@ function SignInButtons() {
     var test = checkEmail(user);
     if(!test){
       let item = { taikhoan_password: user?.uid, taikhoan_email: user?.email };
-      let res = await fetch("http://localhost:20175/api/user/register", {
+      let res = await fetch("http://localhost:8093/register", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",

@@ -6,9 +6,10 @@ import useAxios from "axios-hooks";
 
 function Hero() {
   const [dt, setDt] = useState([]);
-  const [{ data, loading, error }] = useAxios(`Address`, {});
+  const [{ data, loading, error }] = useAxios(`recipe/list`, {});
   useEffect(() => {
     setDt(data);
+    console.log(data);
   }, [data]);
 
   return (
@@ -148,7 +149,7 @@ function Hero() {
             <div className="col-12">
               <div className="section-title">
                 <h2>Món chiên/rán/nướng</h2>
-                <Link to="/address/list">
+                <Link to="/recipe/list">
                   <span>Xem thêm</span>{" "}
                 </Link>
               </div>
@@ -159,42 +160,6 @@ function Hero() {
               <Link to="#">
                 <div className="single-address wow bounceInLeft ">
                   <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/chagio.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">30 phút</span>
-                    <h6 className="title">Chả giò chay đơn giản</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
                     <img src="/images/food/khoailangme.PNG" alt="#" />
                   </div>
                   <div className="address-info">
@@ -227,310 +192,22 @@ function Hero() {
                 </div>
               </Link>
             </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/chagio.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">30 phút</span>
-                    <h6 className="title">Chả giò chay đơn giản</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/khoailangme.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">10 phút</span>
-                    <h6 className="title">Khoai lang rán bơ mè</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/chagio.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">30 phút</span>
-                    <h6 className="title">Chả giò chay đơn giản</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/khoailangme.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">10 phút</span>
-                    <h6 className="title">Khoai lang rán bơ mè</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/chagio.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">30 phút</span>
-                    <h6 className="title">Chả giò chay đơn giản</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/khoailangme.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">10 phút</span>
-                    <h6 className="title">Khoai lang rán bơ mè</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/chagio.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">30 phút</span>
-                    <h6 className="title">Chả giò chay đơn giản</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            <div className="col-lg-3 col-md-6 col-12 ">
-              <Link to="#">
-                <div className="single-address wow bounceInLeft ">
-                  <div className="address-image wow bounceInLeft">
-                    <img src="/images/food/khoailangme.PNG" alt="#" />
-                  </div>
-                  <div className="address-info">
-                    <span className="category">10 phút</span>
-                    <h6 className="title">Khoai lang rán bơ mè</h6>
-                    <ul className="review">
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <i className="fa fa-star-o" aria-hidden="true"></i>
-                      </li>
-                      <li>
-                        <span>4.0 Review(s)</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </Link>
-            </div>
-            {/* {
-                            dt && dt.slice(0,7).map(({ id_diadiem, diadiem_ten, danhgia, hinhanhs, index }) => {
-                                return (
-
-                                    <div className="col-lg-3 col-md-6 col-12 ">
-                                        <Link to={'/Address/' + id_diadiem}>
-                                            <div key={index} className="single-address wow bounceInLeft ">
-                                                <div className="address-image wow bounceInLeft">
-                                                    <img src={hinhanhs[0] && hinhanhs[0].hinhanh_url} alt="#" />
+            {dt &&
+              dt.slice(0, 7).map(({ id, name, duration, tutorial, category,ingredients, images,rate, index }) => {
+                  return (
+                    <div className="col-lg-3 col-md-6 col-12 ">
+                      <Link to={"/recipe/list/" + id}>
+                        <div
+                          key={index}
+                          className="single-address wow bounceInLeft "
+                        >
+                          <div className="address-image wow bounceInLeft">
+                                                    <img src={images[0] && images[0].url} alt="#" />
                                                 </div>
-                                                <div className="address-info">
-                                                    <span className="category">Trong nước</span>
-                                                    <h6 className="title">
-                                                        {diadiem_ten}
-                                                    </h6>
-                                                        {danhgia && danhgia.map(({ danhgia_sao, key }) => {
+                          <div className="address-info">
+                            <span className="category">{duration}</span>
+                            <h6 className="title">{name}</h6>
+                            {/* {danhgia && danhgia.map(({ danhgia_sao, key }) => {
                                                             return (
                                                             <ul className="review" key={key}>
                                                                 {Array.from(Array(Number(danhgia_sao)), (e, i) =>
@@ -559,48 +236,84 @@ function Hero() {
                                                             </li> 
                                                             <li ><span>5.0 Review(s)</span></li>
                                                             </ul>
-                                                        )}
-                                                     
-
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </div>);
-                            })
-                        }
-                        <div className="col-lg-3 col-md-6 col-12 ">
-                                        <Link to="/Address/add">
-                                            <div className="single-address wow bounceInLeft ">
-                                                <div className="address-image wow bounceInLeft container">
-                                                    <img className="mx-1 my-1 py-3 px-3" src="/images/address/add.png" alt="#" />
-                                                </div>
-                                                <div className="address-info">
-                                                    <span className="category">**** nước</span>
-                                                    <h6 className="title">
-                                                         Địa điểm mới của bạn
-                                                    </h6>
-                                                    <ul className="review">
-                                                    <li>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                    </li> 
-                                                    <li>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                    </li> 
-                                                    <li>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                    </li> 
-                                                    <li>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                    </li> 
-                                                    <li>
-                                                        <i className="fa fa-star" aria-hidden="true"></i>
-                                                    </li> 
-                                                    <li ><span>5.0 Review(s)</span></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </Link>
-                                    </div>  */}
+                                                        )} */}
+                            <ul className="review">
+                  
+                              <li>
+                                <i
+                                  className="fa fa-star"
+                                  aria-hidden="true"
+                                ></i>
+                              </li>
+                              <li>
+                                <i
+                                  className="fa fa-star"
+                                  aria-hidden="true"
+                                ></i>
+                              </li>
+                              <li>
+                                <i
+                                  className="fa fa-star"
+                                  aria-hidden="true"
+                                ></i>
+                              </li>
+                              <li>
+                                <i
+                                  className="fa fa-star"
+                                  aria-hidden="true"
+                                ></i>
+                              </li>
+                              <li>
+                                <i
+                                  className="fa fa-star-o"
+                                  aria-hidden="true"
+                                ></i>
+                              </li>
+                              <li>
+                                <span>4.0 Review(s)</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  );
+                })}
+            <div className="col-lg-3 col-md-6 col-12 ">
+              <Link to="/recipe/add">
+                <div className="single-address wow bounceInLeft ">
+                  <div className="address-image wow bounceInLeft container">
+                    <img
+                      className="mx-1 my-1 py-3 px-3"
+                      src="/images/address/add.png"
+                      alt="#"
+                    />
+                  </div>
+                  <div className="address-info">
+                    <span className="category">**** phút</span>
+                    <h6 className="title">Thêm món ăn mới</h6>
+                    <ul className="review">
+                      <li>
+                        <i className="fa fa-star" aria-hidden="true"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star" aria-hidden="true"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star" aria-hidden="true"></i>
+                      </li>
+                      <li>
+                        <i className="fa fa-star" aria-hidden="true"></i>
+                      </li>
+                      <br />
+                      <li>
+                        <span>5.0 Review(s)</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

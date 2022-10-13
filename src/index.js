@@ -7,8 +7,8 @@ import reportWebVitals from './reportWebVitals';
 import { configure } from "axios-hooks";
 import axios from "axios";
 import LRU from "lru-cache";
-axios.defaults.baseURL = "http://localhost:20175/api/"
-// const cache = new LRU({ max: 10 });
+axios.defaults.baseURL = "http://localhost:8093/"
+const cache = new LRU({ max: 10 });
 configure({ axios })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,8 +19,4 @@ root.render(
    </CookiesProvider>
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

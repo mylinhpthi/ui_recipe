@@ -31,6 +31,7 @@ function UploadImages({ handleChange, data }) {
     <form>
       <ImageUploader
         key="image-uploader"
+        className="imageUploader"
         withIcon={false}
         withLabel={false}
         withPreview={true}
@@ -40,16 +41,7 @@ function UploadImages({ handleChange, data }) {
         maxFileSize={5242880}
         buttonText="Chọn hình ảnh"
       ></ImageUploader>
-      {!loading &&
-        hinhanh.map((item) => {
-          return (
-            <img
-              src={item.hinhanh_url}
-              className="hinhanh_url"
-              alt="image"
-            ></img>
-          );
-        })}
+     
       {bool && (
         <button
           className="btn btn-outline-darks clear-all"

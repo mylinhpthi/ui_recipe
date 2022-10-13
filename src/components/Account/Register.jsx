@@ -14,10 +14,23 @@ function Register() {
   const [confirmPassword, setconfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
-  const [{ data, loading, error }] = useAxios(`User`);
-  function checkEmail(){
+  const [data, setData] = useState([]);
+  // const [{ data, loading, error }] = useAxios(`User`);
+  async function checkEmail(){
+    let res = await fetch("http://localhost:8093/User", {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+        'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
+      }});
+      
+    data = await res.json();
+    setData(data);
     data.some((item)=>{
-      if(email == item.taikhoan_email){
+      if(email == item.username){
         errors["email"] = "Địa chỉ Email đã tồn tại. Vui lòng thử lại!";
         return true;
       }
@@ -43,13 +56,11 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
     errors["confirmPassword"] = null;
   }
   async function registers() {
-    await checkEmail();
     await checkPassword();
     await checkConfirmPassword();
-    // console.log("email:"+ errors["email"]+"Password: "+errors["password"])
     if(errors["email"]==null && errors["password"]==null && errors["confirmPassword"]==null){
-      let item = { taikhoan_password: password, taikhoan_email: email };
-      let res = await fetch("http://localhost:20175/api/user/register", {
+      let item = { password: password, username: email };
+      let res = await fetch("http://localhost:8093/register", {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -57,9 +68,21 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
         },
         body: JSON.stringify(item)
       });
-      res = await res.json();
-        toast.success('Đăng ký thành công. Đăng nhập lại nhé!')
-        navigate("/login");
+      if(res.status == 400){
+          toast.error("Đã tồn tại tên đăng nhập tài khoản!");
+      }
+      else{
+        // res = await res.json();
+        // if(res.status==400){
+        //   toast.error("Đã tồn tại tên đăng nhập tài khoản!");
+          
+        // }else{
+          toast.success('Đăng ký thành công. Đăng nhập lại nhé!')
+          navigate("/login");
+        // }
+      }
+      
+       
     }
 
     

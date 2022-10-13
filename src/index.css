@@ -31,7 +31,9 @@ a:hover {
 .a-custom:hover {
   color: #fff;
 }
-
+.chooseFileButton{
+  background-color: #49a101 !important;
+}
 a:not([href]):not([tabindex]) {
   color: inherit;
   text-decoration: none;
@@ -722,7 +724,10 @@ a:not([href]):not([tabindex]):focus {
   }
 }
 
-
+.btn-confirm{
+  color:white !important;
+  width: 20%;
+}
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .section-title {
     margin-bottom: 30px;
@@ -785,7 +790,7 @@ a:not([href]):not([tabindex]):focus {
   box-shadow: 0 0 20px #00000012;
   padding: 10px;
   background: #fff;
-  height: 350px;
+  min-height: 300px; 
   overflow: hidden;
 }
 .list-address .single-address {
@@ -796,7 +801,7 @@ a:not([href]):not([tabindex]):focus {
 }
 .single-address .address-image {
   position: relative;
-  height: 60%;
+  /* height: 60%; */
   border-radius: 5px;
   overflow: hidden;
   object-fit: contain;
@@ -833,7 +838,8 @@ a:not([href]):not([tabindex]):focus {
 
 .single-address .address-image img {
   width: 100%;
-  height: 100%;
+  height: 150px;
+  object-fit: cover;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   border-radius: 4px;
@@ -882,7 +888,11 @@ a:not([href]):not([tabindex]):focus {
 
 .single-address .address-info .title {
   margin-top: .5rem;
-
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px),
@@ -898,6 +908,7 @@ a:not([href]):not([tabindex]):focus {
 
 .single-address .address-info .review {
   margin-top: 5px;
+  padding: 0;
 }
 
 .single-address .address-info .review li {
@@ -1155,7 +1166,9 @@ border-bottom: 1px solid red;
 
 .uploadPictureContainer img {
   height: 100px !important;
-  width: 100px;
+  width: 100px !important;
+  background-size: contain;
+  margin-left: 5px;
 }
 
 .fileContainer {
