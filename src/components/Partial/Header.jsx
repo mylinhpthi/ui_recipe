@@ -1,8 +1,9 @@
 import React,{ useEffect, useState, useContext }  from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SignInButtons from '../Account/SignInButtons';
 import { AppContext } from "../../AppContext";
 import useAxios from 'axios-hooks';
+import { signOut } from '../../firebase.services';
 
 function Header() {
 	const [dt, setDt] = useState([]);
@@ -10,13 +11,20 @@ function Header() {
 	var items = !!(localStorage.getItem('user'));
 	useEffect(() => {
 		setDt(data);
-		console.log(data);
 	  }, [data]);
 	const logout =(e) =>{
 		e.preventDefault();
 		localStorage.removeItem('user');
+		signOut();
 		window.location.reload();
 	}
+	// function monanngon(){
+	// 	if(!localStorage.getItem("user")){
+	// 		Navigate("/login");
+	// 	else
+	// 		Navigate("")
+	// 	}
+	// }
 	return (
 			<section className="header ftco-section">
 				<div className="header container-fluid px-md-5">
@@ -83,7 +91,7 @@ function Header() {
 										<a className="dropdown-item" href="/recipe/list">Khác</a>
 									</div>
 								</li>
-								<li className="nav-item"><a href="#" className="nav-link">Món ăn ngon</a></li>
+								<li className="nav-item"><a href="/favoriteRecipe" className="nav-link">Món ăn ngon</a></li>
 								<li className="nav-item"><a href="#" className="nav-link">Feedback</a></li>
 								<li className="nav-item dropdown category">
 									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Tin tức</a>

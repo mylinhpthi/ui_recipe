@@ -7,6 +7,7 @@ import { useCookies } from "react-cookie";
 import useAxios from "axios-hooks";
 import Map from "../Partial/Map";
 import UploadImages from "../Partial/UploadImages";
+import Header from "../Partial/Header";
 
 function RecipeAdd() {
   const notify = () => toast("");
@@ -62,12 +63,10 @@ function RecipeAdd() {
       ingredients:ingredient,
       images:imageRespond
     };
-    // for (let i = 0; i < image.length; i++) {
-    //   console.log(i, " ", hinhanh[i]);
-    // }
-    // await addRecipe({ data: item }).then((res) => {
-    //   toast.success("Thêm món ăn thành công!");
-    // });
+    await addRecipe({ data: item }).then((res) => {
+      toast.success("Thêm món ăn thành công!");
+      navigate("/recipe/list/"+res.id);
+    });
     console.log(item);
   }
   function handleChange(files) {
@@ -78,7 +77,9 @@ function RecipeAdd() {
   }
 
   return (
-    <section className="h-100 bg-dark">
+    <div>
+      <Header />
+      <section className="h-100 bg-dark">
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col col-xl-10">
@@ -210,9 +211,11 @@ function RecipeAdd() {
         </div>
       </div>
 
-      {!!imageRequest &&
-        imageRequest.map((link, key) => <img src={link} alt="AAAA" key={key} />)}
+      {/* {!!imageRequest &&
+        imageRequest.map((link, key) => <img src={link} alt="AAAA" key={key} />)} */}
     </section>
+    </div>
+    
   );
 }
 

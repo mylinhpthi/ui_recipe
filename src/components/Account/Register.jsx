@@ -59,7 +59,8 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
     await checkPassword();
     await checkConfirmPassword();
     if(errors["email"]==null && errors["password"]==null && errors["confirmPassword"]==null){
-      let item = { password: password, username: email };
+      let item = { password: password, username: email, email:email };
+      console.log(item)
       let res = await fetch("http://localhost:8093/register", {
         method: 'POST',
         headers: {

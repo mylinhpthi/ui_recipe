@@ -24,6 +24,10 @@ import Map from "./components/Partial/Map";
 import ListRecipe from "./components/Recipe/RecipeList";
 import RecipeDetail from "./components/Recipe/RecipeDetail";
 import RecipeAdd from "./components/Recipe/RecipeAdd";
+import RecipeEdit from "./components/Recipe/RecipeEdit";
+import FavoriteRecipe from "./components/Recipe/FavoriteRecipe";
+import ActiveAccount from "./components/Account/ActiveAccount";
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -44,6 +48,7 @@ function App() {
   const [currentUser,  setCurrentUser] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState();
+  
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -81,9 +86,7 @@ function App() {
         <AppContext.Provider
           value={{ isAuth, currentUser, isLoading, setIsLoading, setIsAuth,  setCurrentUser}}
         >
-            <Router>
-              <Header />
-            </Router>
+          
             <Router>
               <Routes>
                 <Route exact path="/" element={<Hero />} />
@@ -92,8 +95,11 @@ function App() {
                 <Route path="/register" element={<Register />} />
                 <Route path="/recipe/list" element={<ListRecipe />} />
                 <Route path="/recipe/add" element={<RecipeAdd />} />
+                <Route path="/favoriteRecipe" element={<FavoriteRecipe />} />
+                <Route path="/recipe/edit/:id" element={<RecipeEdit />} />
+                {/* Show detail recipe */}
                 <Route path="/recipe/list/:id" element={<RecipeDetail />} />
-                {/* <Route path="/recipe/:id/edit" element={<Editrecipe />} /> */}
+                <Route path="/user/:name" element={<ActiveAccount />} />
               </Routes>
             </Router>
             <Footer />

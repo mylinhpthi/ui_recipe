@@ -1,14 +1,17 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
 import useAxios from "axios-hooks";
 import Map from "../Partial/Map";
 import UploadImages from "../Partial/UploadImages";
+import Header from "../Partial/Header";
 
-function RecipeAdd() {
+function RecipeEdit() {
+  let { id } = useParams();
+  const [{ data: dataC, loading, error }] = useAxios(`recipe/list/${id}`);
   const notify = () => toast("");
   const [recipe_name, setRecipe_name] = useState("");
   const [recipe_duration, setRecipe_duration] = useState("");
@@ -20,7 +23,17 @@ function RecipeAdd() {
   const navigate = useNavigate();
   var today = new Date();
   var i = 0;
-
+  useEffect(() => {
+    if (dataC) {
+      console.log(dataC)
+      setRecipe_name(dataC.name);
+      setCategories(dataC.categories && dataC.categories.id);
+      setRecipe_duration(dataC.duration);
+      setTutorial(dataC.tutorial);
+      setIngredient(dataC.ingredients);
+      setImageRequest(dataC.images);
+    }
+  }, [dataC]);
   const [{ data: category, loading: cLoading, error: CError }] =
     useAxios(`category/list`);
   async function getBase64(file) {
@@ -30,18 +43,18 @@ function RecipeAdd() {
     reader.onload = () => {
       console.log("Called", reader);
       baseURL = reader.result;
-      imageRequest.push(baseURL);
+      imageRequest.push({url:baseURL});
     };
     setImageRequest(imageRequest);
   }
-  const [{}, addRecipe] = useAxios(
+  const [{}, updateData] = useAxios(
     {
-      url: `recipe/add`,
+      url: `recipe/edit/${id}`,
       method: "POST",
     },
     { manual: true }
   );
-  async function add() {
+  async function updateRecipe() {
     let danhmuc = {};
     for (let i = 0; i < category.length; i++) {
       if (category[i].id == categories) {
@@ -52,23 +65,23 @@ function RecipeAdd() {
       }
     }
     for (let i = 0; i < imageRequest.length; i++) {
-      imageRespond[i] = { name: recipe_name, url: imageRequest[i] };
+      imageRespond[i] = { "id": "63469da71dd81fdfdfdb348",name: recipe_name, url: imageRequest[i].url };
     }
     let item = {
+        id:id,
         name:recipe_name,
         duration:recipe_duration,
-        tutorial,
-        category:danhmuc,
-      ingredients:ingredient,
-      images:imageRespond
+        status: "active",
+        tutorial: tutorial,
+        category:danhmuc??{"id":"", name:"Nướng"},
+        ingredients:ingredient,
+        images:imageRespond
     };
-    // for (let i = 0; i < image.length; i++) {
-    //   console.log(i, " ", hinhanh[i]);
-    // }
-    // await addRecipe({ data: item }).then((res) => {
-    //   toast.success("Thêm món ăn thành công!");
-    // });
     console.log(item);
+    await updateData({ data: item }).then((res) => {
+      toast.success("Cập nhật món ăn thành công!");
+      navigate("/recipe/list/");
+    });
   }
   function handleChange(files) {
     setImageRequest([]);
@@ -78,6 +91,8 @@ function RecipeAdd() {
   }
 
   return (
+   <div>
+    <Header />
     <section className="h-100 bg-dark">
       <div className="container h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
@@ -97,12 +112,23 @@ function RecipeAdd() {
                         className="breadcrumb-item active"
                         aria-current="page"
                       >
-                        Thêm món ăn
+                        Chỉnh sửa món ăn
                       </li>
                     </ol>
                   </nav>
                   <div className="mb-4 div-fluid">
                     <UploadImages handleChange={handleChange} />
+                     {dataC && imageRequest &&
+                    imageRequest.map(item => {
+                      return (
+                        <img
+                        src={item.url}
+                        className="hinhanh_url"
+                        alt="image" />
+                      )
+                     
+                     })} 
+                    
                   </div>
                 </div>
                 <div className="col-md-6 col-lg-7 d-flex align-items-center">
@@ -113,17 +139,28 @@ function RecipeAdd() {
                           <label htmlFor="username" className="form-label">
                             Danh mục món ăn:
                           </label>
+                          
                           <select
                             className="form-select"
                             onChange={(e) => setCategories(e.target.value)}
                           >
-                            <option selected disabled>
-                              Chọn danh mục món ăn
-                            </option>
                             {category &&
-                              category.map(({ id, name }) => {
-                                return <option value={id}>{name}</option>;
-                              })}
+                            dataC &&
+                            category.map(({ id, name }) => {
+                              if (id == dataC.category.id) {
+                                return (
+                                  <option selected value={id}>
+                                    {name}
+                                  </option>
+                                );
+                              } else
+                                return (
+                                  <option value={id}>
+                                    {name}
+                                  </option>
+                                );
+                            })}
+                           
                           </select>
                         </div>
                         <div className="col-md-6 mb-2">
@@ -137,6 +174,7 @@ function RecipeAdd() {
                             id="duration"
                             name="duration"
                             placeholder=""
+                            value={recipe_duration}
                             require="true"
                           />
                         </div>
@@ -153,6 +191,7 @@ function RecipeAdd() {
                           id="recipe_name"
                           name="recipe_name"
                           placeholder=""
+                          value={recipe_name}
                           require="true"
                         />
                       </div>
@@ -169,6 +208,7 @@ function RecipeAdd() {
                       onChange={(e) => setTutorial(e.target.value)}
                       className="form-control"
                       id="tutorial"
+                      value={tutorial}
                       name="tutorial"
                       require="true"
                     />
@@ -182,6 +222,7 @@ function RecipeAdd() {
                       onChange={(e) => setIngredient(e.target.value)}
                       className="form-control"
                       id="ingredient"
+                      value={ingredient}
                       name="ingredient"
                       require="true"
                     />
@@ -196,7 +237,7 @@ function RecipeAdd() {
                     </Link>
                   </p>
                   <Button
-                    onClick={add}
+                    onClick={updateRecipe}
                     className="btn-confirm"
                     variant="contained"
                     type="submit"
@@ -210,10 +251,11 @@ function RecipeAdd() {
         </div>
       </div>
 
-      {!!imageRequest &&
-        imageRequest.map((link, key) => <img src={link} alt="AAAA" key={key} />)}
+      {/* {!!imageRequest &&
+        imageRequest.map((link, key) => <img src={link} alt="AAAA" key={key} />)} */}
     </section>
+   </div>
   );
 }
 
-export default RecipeAdd;
+export default RecipeEdit;
