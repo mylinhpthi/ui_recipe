@@ -27,6 +27,7 @@ import RecipeAdd from "./components/Recipe/RecipeAdd";
 import RecipeEdit from "./components/Recipe/RecipeEdit";
 import FavoriteRecipe from "./components/Recipe/FavoriteRecipe";
 import ActiveAccount from "./components/Account/ActiveAccount";
+import Template01 from "./components/Template/template01";
 
 const theme = createTheme({
   palette: {
@@ -97,6 +98,7 @@ function App() {
                 <Route path="/recipe/add" element={<RecipeAdd />} />
                 <Route path="/favoriteRecipe" element={<FavoriteRecipe />} />
                 <Route path="/recipe/edit/:id" element={<RecipeEdit />} />
+                <Route path="/blog/1" element={<Template01 />} />
                 {/* Show detail recipe */}
                 <Route path="/recipe/list/:id" element={<RecipeDetail />} />
                 <Route path="/user/:name" element={<ActiveAccount />} />

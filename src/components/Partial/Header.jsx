@@ -96,7 +96,7 @@ function Header() {
 								<li className="nav-item dropdown category">
 									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Tin tức</a>
 									<div className="dropdown-menu category-dropdown-menu" >
-										<a className="dropdown-item" href="#">Giảm cân Healthy với Granola</a>
+										<a className="dropdown-item" href="/bog/1">Hồn Việt trong ẩm thực Tết ở miền Bắc</a>
 										<a className="dropdown-item" href="#">Ăn sáng ngon miệng bằng súp </a>
 										<a className="dropdown-item" href="#">Top những mâm cơm gia đình hạnh phúc</a>
 										<a className="dropdown-item" href="#">Bí quyết của hạnh phúc: "Yêu từ dạ dày"</a>
