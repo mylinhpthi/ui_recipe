@@ -56,9 +56,9 @@ function SignInButtons() {
     console.log("uid",user?.uid)
     setCurrentUser(user);
     logEvent(analytics, "login");
-
-    navigate("/");
     localStorage.setItem("user", JSON.stringify(user.email));
+    navigate("/");
+    
     // window.location.reload();
   };
 

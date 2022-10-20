@@ -280,16 +280,16 @@ function RecipeDetail() {
                           height="60"
                         />
                         <div>
-                          <h6 className="fw-bold mb-1">{item.user.username}</h6>
+                          <h6 className="fw-bold mb-1">{item.user?.username}</h6>
                           <div className="d-flex align-items-center mb-3">
                             <p className="mb-0">{item.createAt}</p>
                             {localStorage.getItem('user') ===  item.user.username && (
-                              <div>x
+                              <div>
                                 <a href="#!" onClick={()=>deleteComment(item)} style={{ color: "#aaa;" }}>
                                   <i className="fa fa-trash ms-2"></i>
                                 </a>
                               </div>
-                            )}
+                            )}  
                           </div>
                           <p className="mb-0">{item.content}</p>
                         </div>

@@ -28,6 +28,8 @@ import RecipeEdit from "./components/Recipe/RecipeEdit";
 import FavoriteRecipe from "./components/Recipe/FavoriteRecipe";
 import ActiveAccount from "./components/Account/ActiveAccount";
 import Template01 from "./components/Template/template01";
+import User from "./components/AdminHome/user/User";
+import Home from "./components/AdminHome/Home";
 
 const theme = createTheme({
   palette: {
@@ -90,8 +92,10 @@ function App() {
           
             <Router>
               <Routes>
-                <Route exact path="/" element={<Hero />} />
-                {/* <Route exact path="/" element={<Map />} /> */}
+                {/* <Route exact path="/" element={<Hero />} /> */}
+                <Route exact path="/" element={<Home />} />
+                <Route exact path="/admin/user" element={<User />} />
+                {/* <Route exact path="/admin" element={<Home />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/recipe/list" element={<ListRecipe />} />
