@@ -35,6 +35,8 @@ import RecipeAdd from "./components/Recipe/RecipeAdd";
 import RecipeAddAd from "./components/AdminHome/recipe/RecipeAdd";
 import CategoryAdd from "./components/AdminHome/category/CategoryAdd";
 import UserPrivilege from "./components/AdminHome/user/UserPrivilege";
+import Error404 from "./components/Partial/Error404";
+import Error403 from "./components/Partial/Error403";
 
 const theme = createTheme({
   palette: {
@@ -56,7 +58,7 @@ function App() {
   const [currentUser,  setCurrentUser] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useState();
-  
+  const [privilege, setPrivilege] = useState([]);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -68,6 +70,7 @@ function App() {
       } else {
         setIsAuth(false);
         setCurrentUser(null);
+        setPrivilege([]);
       }
     });
   }, []);
@@ -92,13 +95,13 @@ function App() {
     <div className="App">
       <ThemeProvider theme={theme}>
         <AppContext.Provider
-          value={{ isAuth, currentUser, isLoading, setIsLoading, setIsAuth,  setCurrentUser}}
+          value={{ isAuth, currentUser, isLoading, setIsLoading, setIsAuth,  setCurrentUser, privilege, setPrivilege}}
         >
           
             <Router>
               <Routes>
-                {/* <Route exact path="/" element={<Hero />} /> */}
-                <Route exact path="/" element={<Home />} />
+                <Route exact path="/" element={<Hero />} />
+                <Route exact path="/admin" element={<Home />} />
                 <Route exact path="/admin/user" element={<User />} />
                 <Route exact path="/admin/user/privilege/:id" element={<UserPrivilege />} />
                 <Route exact path="/admin/recipe" element={<Recipe />} />
@@ -117,6 +120,8 @@ function App() {
                 {/* Show detail recipe */}
                 <Route path="/recipe/list/:id" element={<RecipeDetail/>} />
                 <Route path="/user/:name" element={<ActiveAccount />} />
+                <Route exact path="/error/404" element={<Error404 />} />
+                <Route exact path="/error/403" element={<Error403 />} />
               </Routes>
             </Router>
             <Footer />

@@ -14,7 +14,6 @@ function FavoriteRecipe() {
   useEffect(() => {
     if(!localStorage.getItem("user"))   navigate("/login");
     else
-    
     setDt(data);
   }, [data]);
   return (

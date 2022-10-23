@@ -59,7 +59,20 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
     await checkPassword();
     await checkConfirmPassword();
     if(errors["email"]==null && errors["password"]==null && errors["confirmPassword"]==null){
-      let item = { password: password, username: email, email:email };
+      let item = { password: password, username: email, email:email, privilege:[
+        {
+          "id": "63512b83caf267316d40e331",
+          "name": "Xóa món ăn"
+      },
+      {
+          "id": "63512b7ecaf267316d40e330",
+          "name": "Chỉnh sửa món ăn"
+      },
+      {
+          "id": "63512b7acaf267316d40e32f",
+          "name": "Thêm món ăn"
+      },
+      ] };
       console.log(item)
       let res = await fetch("http://localhost:8093/register", {
         method: 'POST',

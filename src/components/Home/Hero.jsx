@@ -6,14 +6,29 @@ import useAxios from "axios-hooks";
 import { AppContext } from "../../AppContext";
 import Loading from "../Partial/Loading";
 import Header from "../Partial/Header";
+import { useCookies } from "react-cookie";
 
 function Hero() {
   const [dt, setDt] = useState([]);
+  const [privilege, setPrivilege] = useState([]);
+  const { isLoading, setIsLoading, setCurrentUser, isAuth } =
+  React.useContext(AppContext);
+  const [cookies, setCookie, removeCookie] = useCookies(["privilege"]);
   const [{ data, loading, error }] = useAxios(`recipe/list`, {});
   const hasData = dt != null;
+  var hasAddRecipe = cookies.privilege != "null" &&  cookies.privilege.some((el) => el.id == "63512b7acaf267316d40e32f");
   useEffect(() => {
     setDt(data);
+    console.log(cookies.privilege.length);
+    console.log(hasAddRecipe);
+   
   }, [data]);
+  // useEffect(() => {
+  //   if (cookies.privilege != "null") {
+  //     if (cookies.privilege.some((el) => el.id == "63512b7acaf267316d40e32f"))
+  //       hasAddRecipe = true;
+  //   }
+  // }, [data]);
 
   return (
     <div>
@@ -201,7 +216,7 @@ function Hero() {
                 </div>
                 {dt &&
                   dt
-                    .slice(0, 7)
+                    .slice(0, 6)
                     .map(
                       ({
                         id,
@@ -223,43 +238,16 @@ function Hero() {
                               >
                                 <div className="address-image wow bounceInLeft">
                                   <img
-                                    src={images[images.length-1] && images[images.length-1].url}
+                                    src={
+                                      images[images.length - 1] &&
+                                      images[images.length - 1].url
+                                    }
                                     alt="#"
                                   />
                                 </div>
                                 <div className="address-info">
                                   <span className="category">{duration}</span>
                                   <h6 className="title">{name}</h6>
-                                  {/* {danhgia && danhgia.map(({ danhgia_sao, key }) => {
-                                                            return (
-                                                            <ul className="review" key={key}>
-                                                                {Array.from(Array(Number(danhgia_sao)), (e, i) =>
-                                                                 { return <li><i key={i} className="fa fa-star" aria-hidden="true"></i></li> })}
-                                                                {Array.from(Array(5 - Number(danhgia_sao)), (e, i) => 
-                                                                { return <li><i key={i} className="fa fa-star-o" aria-hidden="true"></i></li> })}
-                                                                <li ><span>{danhgia_sao}.0 Review(s)</span></li>
-                                                            </ul>)
-                                                        })}
-                                                        {!danhgia&&(
-                                                            <ul className="review">
-                                                            <li>
-                                                                <i className="fa fa-star" aria-hidden="true"></i>
-                                                            </li> 
-                                                            <li>
-                                                                <i className="fa fa-star" aria-hidden="true"></i>
-                                                            </li> 
-                                                            <li>
-                                                                <i className="fa fa-star" aria-hidden="true"></i>
-                                                            </li> 
-                                                            <li>
-                                                                <i className="fa fa-star" aria-hidden="true"></i>
-                                                            </li> 
-                                                            <li>
-                                                                <i className="fa fa-star" aria-hidden="true"></i>
-                                                            </li> 
-                                                            <li ><span>5.0 Review(s)</span></li>
-                                                            </ul>
-                                                        )} */}
                                   <ul className="review">
                                     <li>
                                       <i
@@ -302,41 +290,44 @@ function Hero() {
                         );
                       }
                     )}
-                <div className="col-lg-3 col-md-6 col-12 ">
-                  <Link to="/recipe/add">
-                    <div className="single-address wow bounceInLeft ">
-                      <div className="address-image wow bounceInLeft container">
-                        <img
-                          className="mx-1 my-1 py-3 px-3"
-                          src="/images/address/add.png"
-                          alt="#"
-                        />
+                {hasAddRecipe && (
+                  <div className="col-lg-3 col-md-6 col-12 ">
+                    <Link to="/recipe/add">
+                      <div className="single-address wow bounceInLeft ">
+                        <div className="address-image wow bounceInLeft container">
+                          <img
+                            style={{ objectFit: "contain" }}
+                            className="mx-1 my-1 py-3 px-3"
+                            src="/images/address/add.png"
+                            alt="#"
+                          />
+                        </div>
+                        <div className="address-info">
+                          <span className="category">**** phút</span>
+                          <h6 className="title">Thêm món ăn mới</h6>
+                          <ul className="review">
+                            <li>
+                              <i className="fa fa-star" aria-hidden="true"></i>
+                            </li>
+                            <li>
+                              <i className="fa fa-star" aria-hidden="true"></i>
+                            </li>
+                            <li>
+                              <i className="fa fa-star" aria-hidden="true"></i>
+                            </li>
+                            <li>
+                              <i className="fa fa-star" aria-hidden="true"></i>
+                            </li>
+                         
+                            <li>
+                              <span>5.0 Review(s)</span>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
-                      <div className="address-info">
-                        <span className="category">**** phút</span>
-                        <h6 className="title">Thêm món ăn mới</h6>
-                        <ul className="review">
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <br />
-                          <li>
-                            <span>5.0 Review(s)</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
+                    </Link>
+                  </div>
+                )}
               </div>
             </div>
           </section>

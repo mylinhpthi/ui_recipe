@@ -11,6 +11,8 @@ export const AppContext = createContext({
         accessToken: "",
         uid: ""
     },
+    privilege:[],
+    setPrivilege: () => { },
     setIsLoading: () => { },
     setIsAuth: () => { },
     setCurrentUser: () => { }, 

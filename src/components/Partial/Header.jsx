@@ -4,8 +4,10 @@ import SignInButtons from '../Account/SignInButtons';
 import { AppContext } from "../../AppContext";
 import useAxios from 'axios-hooks';
 import { signOut } from '../../firebase.services';
+import { useCookies } from 'react-cookie';
 
 function Header() {
+	const [cookies, setCookie, removeCookie] = useCookies(["privilege"]);
 	const [dt, setDt] = useState([]);
 	const [{ data, loading, error }] = useAxios(`category/list`, {});
 	var items = !!(localStorage.getItem('user'));
@@ -15,16 +17,11 @@ function Header() {
 	const logout =(e) =>{
 		e.preventDefault();
 		localStorage.removeItem('user');
+		setCookie("privilege", "null");
 		signOut();
 		window.location.reload();
 	}
-	// function monanngon(){
-	// 	if(!localStorage.getItem("user")){
-	// 		Navigate("/login");
-	// 	else
-	// 		Navigate("")
-	// 	}
-	// }
+	
 	return (
 			<section className="header ftco-section">
 				<div className="header container-fluid px-md-5">

@@ -11,7 +11,7 @@ toast.configure();
 
 function Login() {
   const notify = () => toast("");
-  const { isLoading, setIsLoading, setCurrentUser, setIsAuth } =
+  const { isLoading, setIsLoading, setCurrentUser, setIsAuth, setPrivilege, privilege } =
     React.useContext(AppContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -44,15 +44,26 @@ function Login() {
         accessToken: res.token,
         uid: res.user.id,
       });
+      setPrivilege(res.user.privilege);
       localStorage.setItem("user", res.user.username);
+      setCookie("privilege", res.user.privilege, 3);
       
-       window.location.reload();
-       navigate("/");
+       // Kiểm tra xem có quyền admin không arr.some(el => el.id === id)
+       if(res.user.privilege!=null)
+          if(res.user.privilege.some(el => el.id === "6354cfc925489097bde657b3"))
+            navigate("/admin");
+          else
+            navigate("/");
+        else
+        navigate("/");
+        window.location.reload();
+        
+       
       if (remember) setCookie("user", username, 3);
     } else {
       toast.error("Đăng nhập không thành công. Vui lòng thử lại!");
     }
-    setIsLoading(false);
+    setIsLoading(false);console.log(privilege);
   }
   return (
     <div className="login">
