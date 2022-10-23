@@ -735,4 +735,16 @@
   height: 100%;
  }
  }
+ .btn-new{
+  border: 1px solid #000;
+  position: absolute;
+  margin-top: 10px;
+}
+.div-btn{
+  height: 25px;
+}
+.btn-new:hover{
+  background-color: black;
+  color: #fff
+}
  

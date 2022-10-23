@@ -40,6 +40,9 @@
   padding: 5px;
   cursor: pointer;
 }
+.active-sidebar{
+  background-color: #ece8ff;
+}
 .sidebar .center ul li:hover {
   background-color: #ece8ff;
 }

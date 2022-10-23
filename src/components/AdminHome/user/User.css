@@ -6,3 +6,9 @@
 .list .listContainer {
   flex: 6;
 }
+.checkList{
+  margin: auto
+}
+.checkList .list-container{
+  margin-left: 20%;
+}
