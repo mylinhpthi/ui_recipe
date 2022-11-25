@@ -20,7 +20,8 @@ import * as React from "react";
 import Slide from "@mui/material/Slide";
 import { recipeColumns } from "../components/datatable/datatablesource";
 import RecipeDetail from "./RecipeDetail";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -28,7 +29,14 @@ const Recipe = () => {
   const [open, setOpen] = useState(false);
   const [recipe, setRecipe] = useState({});
   const [{ data, loading, error }] = useAxios(`recipe/list`, {});
+  const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(["privilege"]);
   async function handleDelete(id) {
+    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b7acaf267316d40e32f" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
+    {
+      navigate("/error/403");
+      return;
+    } 
     console.log(id);
     let res = await fetch("http://localhost:8093/recipe/delete/" + id, {
       method: "POST",
@@ -119,11 +127,6 @@ const Recipe = () => {
       <Sidebar active="Recipe" />
       <div className="listContainer">
         <Navbar />
-        <div className="div-btn container d-flex justify-content-end "  >
-          <Link to="/admin/recipe/add"  className="btn btn-new" >
-            Thêm mới
-          </Link>
-        </div>
         <Datatable
           data={data}
           actionColumn={actionColumn}

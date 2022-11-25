@@ -9,7 +9,7 @@ import {
   signInWithGoogle,
   db,
   handleAuthError
-} from "../../firebase.services";
+} from "../../services/firebase.services";
 function SignInButtons() {
   const { isAuth, setIsAuth, setCurrentUser } =
     useContext(AppContext);

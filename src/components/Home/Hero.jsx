@@ -1,7 +1,7 @@
 import { Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxios from "axios-hooks";
 import { AppContext } from "../../AppContext";
 import Loading from "../Partial/Loading";
@@ -16,13 +16,24 @@ function Hero() {
   const [cookies, setCookie, removeCookie] = useCookies(["privilege"]);
   const [{ data, loading, error }] = useAxios(`recipe/list`, {});
   const hasData = dt != null;
-  var hasAddRecipe = cookies.privilege != "null" &&  cookies.privilege.some((el) => el.id == "63512b7acaf267316d40e32f");
+  var hasAddRecipe = false;
+  const navigate = useNavigate();
   useEffect(() => {
     setDt(data);
-    console.log(cookies.privilege.length);
-    console.log(hasAddRecipe);
-   
+   if(cookies.privilege != null && cookies.privilege != "null")
+    if(cookies.privilege.some((el) => el.id == "63512b7acaf267316d40e32f"))
+      hasAddRecipe = true;
   }, [data]);
+  const handleAddPrivilege = (event)=>{
+    event.preventDefault();
+    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b5ccaf267316d40e32b" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
+    {
+      navigate("/error/403");
+      return;
+    } 
+    else
+    navigate("/admin/recipe/add");
+  }
   // useEffect(() => {
   //   if (cookies.privilege != "null") {
   //     if (cookies.privilege.some((el) => el.id == "63512b7acaf267316d40e32f"))
@@ -51,7 +62,7 @@ function Hero() {
                   khoăn, HappyFood sẽ giúp bạn làm việc đó!
                 </p>
                 <Button variant="contained">
-                  <Link to="/" className="a-custom ">
+                  <Link to="/new/1st" className="a-custom ">
                     Khám phá ngay
                   </Link>{" "}
                 </Button>
@@ -97,7 +108,7 @@ function Hero() {
                     vàng nâu tạo thành một hỗn hợp ngũ cốc bảo quản dùng dần
                   </div>
                   <button type="button" className="btn btn-secondary">
-                    <Link to="#">Tìm hiểu ngay</Link>{" "}
+                    <Link to="/new/1st">Tìm hiểu ngay</Link>{" "}
                   </button>
                 </div>
               </div>
@@ -112,7 +123,7 @@ function Hero() {
                     mạnh cải thiện khả năng tập trung
                   </div>
                   <button type="button" className="btn btn-secondary">
-                    <Link to="#">Khám phá ngay</Link>{" "}
+                    <Link to="/new/2nd">Khám phá ngay</Link>{" "}
                   </button>
                 </div>
               </div>
@@ -126,7 +137,7 @@ function Hero() {
                     phong cách ẩm thực Việt Nam đã truyền qua nhiều thế hệ
                   </div>
                   <button type="button" className="btn btn-secondary">
-                    <Link to="#">Khám phá ngay</Link>{" "}
+                    <Link to="/new/3rd">Khám phá ngay</Link>{" "}
                   </button>
                 </div>
               </div>
@@ -143,7 +154,7 @@ function Hero() {
                     và muốn chuyển tải cho những người thân yêu của mình.{" "}
                   </p>
                   <button type="button" className="btn btn-secondary">
-                    <Link to="#">Khám phá ngay</Link>{" "}
+                    <Link to="/new/4th">Khám phá ngay</Link>{" "}
                   </button>
                 </div>
               </div>
@@ -178,42 +189,7 @@ function Hero() {
                 </div>
               </div>
               <div className="row ">
-                <div className="col-lg-3 col-md-6 col-12 ">
-                  <Link to="#">
-                    <div className="single-address wow bounceInLeft ">
-                      <div className="address-image wow bounceInLeft">
-                        <img src="/images/food/khoailangme.PNG" alt="#" />
-                      </div>
-                      <div className="address-info">
-                        <span className="category">10 phút</span>
-                        <h6 className="title">Khoai lang rán bơ mè</h6>
-                        <ul className="review">
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star-o" aria-hidden="true"></i>
-                          </li>
-                          <li>
-                            <span>4.0 Review(s)</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </Link>
-                </div>
+                
                 {dt &&
                   dt
                     .slice(0, 6)
@@ -292,7 +268,7 @@ function Hero() {
                     )}
                 {hasAddRecipe && (
                   <div className="col-lg-3 col-md-6 col-12 ">
-                    <Link to="/recipe/add">
+                    <Link to="/recipe/add" onClick={handleAddPrivilege}>
                       <div className="single-address wow bounceInLeft ">
                         <div className="address-image wow bounceInLeft container">
                           <img

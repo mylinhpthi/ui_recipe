@@ -13,7 +13,7 @@ import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { signOut } from "../../../../firebase.services";
+import { signOut } from "../../../../services/firebase.services";
 
 const Sidebar = ({active="TrangChu"}) => {
 useEffect(() => {

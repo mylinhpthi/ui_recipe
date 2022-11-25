@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
@@ -9,30 +9,39 @@ import UploadImages from "D:/HK1 - 2022 - 2023/Java/Practices/ui_recipe/src/comp
 import Sidebar from "D:/HK1 - 2022 - 2023/Java/Practices/ui_recipe/src/components/AdminHome/components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 
-function CategoryAdd() {
+function CategoryEdit() {
+  let { id } = useParams();
   const notify = () => toast("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["privilege"]);
-  const [{}, addCategory] = useAxios(
+  const [{ data: dataC, loading, error }] = useAxios(`category/list/${id}`);
+  const [{}, EditCategory] = useAxios(
     {
-      url: `category/add`,
+      url: `category/edit/${id}`,
       method: "POST",
     },
     { manual: true }
   );
-  async function add() {
-   
-    console.log(cookies);
+  async function Edit() {
       let item = {
+        id:id,
         name:name
     };
-    await addCategory({ data: item }).then((res) => {
-      toast.success("Thêm danh mục thành công!");
+    await EditCategory({ data: item }).then((res) => {
+      toast.success("Chỉnh sửa danh mục thành công!");
+      
       navigate("/admin/category/");
     });
     console.log(item);
   }
+  useEffect(() => {
+    if (dataC) {
+      console.log(dataC)
+      setName(dataC.name);
+    }
+  }, [dataC]);
+  
   return (
     <div className="list">
       <Sidebar active="Category" />
@@ -57,6 +66,7 @@ function CategoryAdd() {
                           className="form-control"
                           id="recipe_name"
                           name="recipe_name"
+                          value={name}
                           placeholder=""
                           require="true"
                         />
@@ -67,7 +77,7 @@ function CategoryAdd() {
                 <div className=" mb-2 d-flex justify-content-end px-5">
                   
                   <Button
-                    onClick={add}
+                    onClick={Edit}
                     className="btn-confirm"
                     variant="contained"
                     type="submit"
@@ -88,4 +98,4 @@ function CategoryAdd() {
   );
 }
 
-export default CategoryAdd;
+export default CategoryEdit;

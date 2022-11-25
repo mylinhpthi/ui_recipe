@@ -8,7 +8,7 @@ function Template01() {
  <div className="container mt-5">
     <div className="row d-flex justify-content-center align-items-center">
       <div className="col-md-10">
-        <div className="card">
+        
           <div className="row">
             <div className="col-md-12">
               <div className="product p-4">
@@ -16,8 +16,8 @@ function Template01() {
                   <span className="be-comment-time">
                     Ngày đăng: Oct 14, 2022 at 9:14am
                   </span>
-                  <h1>Hồn Việt trong ẩm thực Tết ở miền Bắc
-                  </h1>
+                  <h2 className='text-success'>Hồn Việt trong ẩm thực Tết ở miền Bắc
+                  </h2>
                   <div className="col-lg-12">
                     <p>
                       <strong>
@@ -71,56 +71,11 @@ function Template01() {
                       Thịt đông - nét đặc trưng của ẩm thực tết miền Bắc
                     </h6>
                   </div>
-                  <p className="mt-5 text-dark font-monospace">Theo Cooky. </p>
                 </div>
               </div>
             </div>
           </div>
-          <div className="be-comment-block">
-            <h1 className="comments-title">Comments</h1>
-            <div className="be-comment">
-              <div className="be-img-comment">	
-                <a href="blog-detail-2.html">
-                  <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt className="be-ava-comment" />
-                </a>
-              </div>
-              <div className="be-comment-content">
-                <span className="be-comment-name">
-                  <a>Nguyễn Văn A</a>
-                </span>
-                <span className="be-comment-time">
-                  <i className="fa fa-clock-o" />
-                  Oct 14, 2022 at 9:14am
-                </span>
-                <p className="be-comment-text">
-                  Lúc 19h, tâm áp thấp nhiệt đới cách Đà Nẵng - Quảng Nam khoảng 190 km về phía đông đông nam. Sức gió mạnh cấp 7, giật cấp 9.
-                </p>
-              </div>
-            </div>
-            <form className="form-block">
-              <div className="row">
-                <div className="col-xs-12 col-sm-6">
-                  <div className="form-group fl_icon">
-                    <input className="form-input" type="text" placeholder="Your name" />
-                  </div>
-                </div>
-                <div className="col-xs-12 col-sm-6 fl_icon">
-                  <div className="form-group fl_icon">
-                    <input className="form-input" type="text" placeholder="Your email" />
-                  </div>
-                </div>
-                <div className="col-xs-12">									
-                  <div className="form-group">
-                    <textarea className="form-input" required placeholder="Your text" defaultValue={""} />
-                  </div>
-                </div>
-                <button className="btn btn-success text-uppercase mr-2 px-4">
-                  Submit
-                </button> 
-              </div>
-            </form>
-          </div> 
-        </div>
+        
       </div>
     </div>
   </div>

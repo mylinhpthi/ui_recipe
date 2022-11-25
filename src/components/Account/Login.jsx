@@ -56,7 +56,6 @@ function Login() {
             navigate("/");
         else
         navigate("/");
-        window.location.reload();
         
        
       if (remember) setCookie("user", username, 3);

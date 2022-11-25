@@ -3,12 +3,14 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import SignInButtons from '../Account/SignInButtons';
 import { AppContext } from "../../AppContext";
 import useAxios from 'axios-hooks';
-import { signOut } from '../../firebase.services';
+import { signOut } from '../../services/firebase.services';
 import { useCookies } from 'react-cookie';
 
 function Header() {
 	const [cookies, setCookie, removeCookie] = useCookies(["privilege"]);
 	const [dt, setDt] = useState([]);
+	const [keyword, setKeyword] = useState("");
+	const navigate = useNavigate();
 	const [{ data, loading, error }] = useAxios(`category/list`, {});
 	var items = !!(localStorage.getItem('user'));
 	useEffect(() => {
@@ -19,7 +21,7 @@ function Header() {
 		localStorage.removeItem('user');
 		setCookie("privilege", "null");
 		signOut();
-		window.location.reload();
+		navigate("/login");
 	}
 	
 	return (
@@ -61,7 +63,7 @@ function Header() {
 						<div className="col-md-4 col-sm-10 d-flex">
 							<form action="#" className="searchform order-lg-last">
 								<div className="form-group d-flex">
-									<input type="text" className="form-control pl-3" placeholder="Search" />
+									<input type="text" className="form-control pl-3" placeholder="Tìm kiếm" onChange={(e) => setKeyword(e.target.value)} />
 									<button type="submit" placeholder="" className="form-control search"><span className="fa fa-search"></span></button>
 								</div>
 							</form>
@@ -89,17 +91,17 @@ function Header() {
 									</div>
 								</li>
 								<li className="nav-item"><a href="/favoriteRecipe" className="nav-link">Món ăn ngon</a></li>
-								<li className="nav-item"><a href="#" className="nav-link">Feedback</a></li>
+								<li className="nav-item"><a href="/feedback" className="nav-link">Feedback</a></li>
 								<li className="nav-item dropdown category">
 									<a className="nav-link dropdown-toggle category-dropdown-toggle" href="#" >Tin tức</a>
 									<div className="dropdown-menu category-dropdown-menu" >
-										<a className="dropdown-item" href="/bog/1">Hồn Việt trong ẩm thực Tết ở miền Bắc</a>
-										<a className="dropdown-item" href="#">Ăn sáng ngon miệng bằng súp </a>
-										<a className="dropdown-item" href="#">Top những mâm cơm gia đình hạnh phúc</a>
-										<a className="dropdown-item" href="#">Bí quyết của hạnh phúc: "Yêu từ dạ dày"</a>
+										<a className="dropdown-item" href="/new/1st">Hồn Việt trong ẩm thực Tết ở miền Bắc</a>
+										<a className="dropdown-item" href="/new/2nd">Ăn sáng ngon miệng bằng súp </a>
+										<a className="dropdown-item" href="/new/3rd">Top những mâm cơm gia đình hạnh phúc</a>
+										<a className="dropdown-item" href="/new/4th">Bí quyết của hạnh phúc: "Yêu từ dạ dày"</a>
 									</div>
 								</li>
-								<li className="nav-item"><a href="#" className="nav-link">Về chúng tôi</a></li>
+								<li className="nav-item"><a href="/aboutus" className="nav-link">Về chúng tôi</a></li>
 							</ul>
 						</div>
 					</div>

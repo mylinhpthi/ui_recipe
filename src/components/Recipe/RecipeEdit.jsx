@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
 import useAxios from "axios-hooks";
-import Map from "../Partial/Map";
 import UploadImages from "../Partial/UploadImages";
 import Header from "../Partial/Header";
 

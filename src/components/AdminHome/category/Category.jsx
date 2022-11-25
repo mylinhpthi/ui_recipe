@@ -20,16 +20,28 @@ import * as React from 'react';
 import Slide from '@mui/material/Slide';
 import { categoryColumns } from "../components/datatable/datatablesource"
 import CategoryDetail from "./CategoryDetail"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import { AppContext } from "../../../AppContext";
 // import CategoryDetail from "./CategoryDetail"
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
   });
 const Category = () => {
-    const [open, setOpen] = useState(false);
-      const [category, setCategory] = useState({});
+   const [open, setOpen] = useState(false);
+   const [category, setCategory] = useState({});
    const [{ data, loading, error }] = useAxios(`category/list`, {});
+   const [categoriesData, setCategoriesData] = useState({});
+   const notify = () => toast("");
+   const navigate = useNavigate();
+    const [cookies, setCookie] = useCookies(["privilege"]);
    async function handleDelete(id) {
+    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b56caf267316d40e32a" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
+    {
+      navigate("/error/403");
+      return;
+    } 
+
     console.log(id);
     let res = await fetch("http://localhost:8093/category/delete/"+id, {
         method: 'POST',
@@ -38,11 +50,20 @@ const Category = () => {
           "Accept": "application/json"
         },
       });
-      if(res){
+       
+      if (res) {
         toast.success("Xóa danh mục thành công!");
       }
-     window.location.reload();
-  };
+      window.location.reload();
+    }
+  function handleClickEdit(id){
+  //   if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b62caf267316d40e32c" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
+  // {
+  //   navigate("/error/403");
+  //   return;
+  // } else
+    navigate("/admin/category/edit/"+id);
+  }
   async function handleClickOpen(id){
     let res = await fetch("http://localhost:8093/category/list/"+id, {
         method: 'GET',
@@ -58,7 +79,23 @@ const Category = () => {
     setOpen(true);
     // console.log(id);
     // setId(id);
-  };
+    
+  }
+  useEffect(()=> {
+    if(data)
+    setCategoriesData(data)
+  }, [data])
+  
+const handleAddPrivilege = (event)=>{
+  event.preventDefault();
+  if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b5ccaf267316d40e32b" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
+  {
+    navigate("/error/403");
+    return;
+  } 
+  else
+  navigate("/admin/category/add");
+}
 
   const handleClose = () => {
     setOpen(false);
@@ -73,6 +110,9 @@ const Category = () => {
           <div className="cellAction">
             <Button onClick={()=>handleClickOpen(params.id)}  style={{ textDecoration: "none" }}>
               <div className="viewButton">Chi tiết</div>
+            </Button>
+            <Button onClick={()=>handleClickEdit(params.id)}  style={{ textDecoration: "none" }}>
+              <div className="viewButton">Chỉnh sửa</div>
             </Button>
             <div
               className="deleteButton"
@@ -131,11 +171,11 @@ const Category = () => {
       <div className="listContainer">
         <Navbar/>
         <div className="div-btn container d-flex justify-content-end "  >
-          <Link to="/admin/category/add"  className="btn btn-new" >
+          <Link to="/admin/category/add" onClick={handleAddPrivilege}  className="btn btn-new" >
             Thêm mới
           </Link>
         </div>
-        <Datatable data={data} actionColumn={actionColumn} column={categoryColumns}/>
+        <Datatable data={categoriesData} actionColumn={actionColumn} column={categoryColumns}/>
       </div>
     </div>
   )

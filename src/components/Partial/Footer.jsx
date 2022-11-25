@@ -23,6 +23,7 @@ function Footer() {
                 </a>
             </div>
         </div>
+        <small className='mb-2'>2022@Create and build by <i>P.T.MyLinh, L.ThienTam, N.N.MinhChau, H.NgocDe, N.ThanhTrung & GV.VuDuyLinh</i></small>
     </section>
   )
 }

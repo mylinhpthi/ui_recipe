@@ -23,7 +23,7 @@ function Home() {
    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3")) || cookies.privilege =="null")
     {toast.error("Truy cập không hợp lệ");
       navigate("/error/403");}
-  }, [])
+  }, [cookies])
   
   return (
 <div className="home">
