@@ -20,7 +20,7 @@ function CategoryDetail({ id }) {
     {}
   );
   const [cateItem, setCateItem] = useState([id, categories && categories.name]);
-  useEffect(() => {
+  useEffect(() => { 
     setDt(data);
   }, [data]);
   useEffect(() => {

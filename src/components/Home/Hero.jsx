@@ -16,23 +16,18 @@ function Hero() {
   const [cookies, setCookie, removeCookie] = useCookies(["privilege"]);
   const [{ data, loading, error }] = useAxios(`recipe/list`, {});
   const hasData = dt != null;
-  var hasAddRecipe = false;
+  const [hasAddRecipe, setHasAddRecipe] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     setDt(data);
-   if(cookies.privilege != null && cookies.privilege != "null")
-    if(cookies.privilege.some((el) => el.id == "63512b7acaf267316d40e32f"))
-      hasAddRecipe = true;
-  }, [data]);
+    if(cookies.privilege?.some((el) => el.id == "63512b7acaf267316d40e32f")){
+      setHasAddRecipe(true);
+    }
+      
+}, [data,]);
   const handleAddPrivilege = (event)=>{
     event.preventDefault();
-    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b5ccaf267316d40e32b" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
-    {
-      navigate("/error/403");
-      return;
-    } 
-    else
-    navigate("/admin/recipe/add");
+    navigate("/recipe/add");
   }
   // useEffect(() => {
   //   if (cookies.privilege != "null") {

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import "./style.css";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Header from '../Partial/Header';
 toast.configure();
 
 function Register() {
@@ -15,9 +16,12 @@ function Register() {
   const [errors, setErrors] = useState([]);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  // const [{ data, loading, error }] = useAxios(`User`);
   async function checkEmail(){
-    let res = await fetch("http://localhost:8093/User", {
+    if(email==""){
+      errors["email"] = "Vui lòng nhập địa chỉ email!";
+      return true;
+    }
+    let res = await fetch("http://localhost:8093/user/list", {
       method: 'GET',
       headers: {
         "Content-Type": "application/json",
@@ -27,8 +31,8 @@ function Register() {
         'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS',
       }});
       
-    data = await res.json();
-    setData(data);
+    const dataJson = await res.json();
+    setData(dataJson);
     data.some((item)=>{
       if(email == item.username){
         errors["email"] = "Địa chỉ Email đã tồn tại. Vui lòng thử lại!";
@@ -56,8 +60,12 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
     errors["confirmPassword"] = null;
   }
   async function registers() {
-    await checkPassword();
-    await checkConfirmPassword();
+    if(email==""){
+      errors["email"] = "Vui lòng nhập địa chỉ email!";
+      return true;
+    }
+    checkPassword();
+    checkConfirmPassword();
     if(errors["email"]==null && errors["password"]==null && errors["confirmPassword"]==null){
       let item = { password: password, username: email, email:email, privilege:[
         {
@@ -86,14 +94,8 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
           toast.error("Đã tồn tại tên đăng nhập tài khoản!");
       }
       else{
-        // res = await res.json();
-        // if(res.status==400){
-        //   toast.error("Đã tồn tại tên đăng nhập tài khoản!");
-          
-        // }else{
           toast.success('Đăng ký thành công. Đăng nhập lại nhé!')
           navigate("/login");
-        // }
       }
       
        
@@ -102,13 +104,15 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
     
   }
   return (
-    <section className="h-100 bg-dark">
-      <div className="container h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
+    <div>
+      <Header />
+       <section className=" bg-dark">
+      <div className="container">
+        <div className="row d-flex justify-content-center align-items-center">
           <div className="col col-xl-10">
             <div className="card card-registration my-4">
               <div className="row g-0">
-                <div className="col-xl-6 d-none d-xl-block">
+                <div className="col-xl-6 d-none d-xl-block" style={{height:'70vh'}}>
                   <img src="/images/auth/register.svg" alt="Sample photo" className="img-fluid ms-5 mt-3" />
                   <div className="sub-login">
                     <p className="mt-4 pb-lg-2" >Bạn đã có tài khoản? <Link to="/login" className='underline' >Đăng nhập ngay</Link></p>
@@ -124,7 +128,7 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
                     
                       <div className="mb-2">
                         <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" onChange={(e) => setEmail(e.target.value)} onFocus={reset} name="email" className={!errors["email"]?"form-control":"is-invalid form-control"}  id="email" required />
+                        <input type="email"  onChange={(e) => setEmail(e.target.value)} onFocus={reset} name="email" className={!errors["email"]?"form-control":"is-invalid form-control"}  id="email" required />
                         <div id="validationServer03Feedback" className="invalid-feedback">
                          { errors["email"]}
                         </div>
@@ -149,7 +153,7 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
                         </div>
                     </div>
                     <div className=" d-flex justify-content-start ">
-                      <Button onClick={registers} variant="contained" type="submit"><span class="p-custome" >Đăng ký</span></Button>
+                      <Button onClick={registers} variant="contained" ><span className="p-custome" >Đăng ký</span></Button>
                     </div>
 
                   </div>
@@ -160,6 +164,8 @@ const regex = {pass:/(?=^.{8,}$)(?=.*\d)(?=.*[!@#$%^&*]+)(?![.\n])(?=.*[A-Z])(?=
         </div>
       </div>
     </section>
+    </div>
+   
   )
 }
 

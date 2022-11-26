@@ -64,7 +64,7 @@ function RecipeAdd() {
     };
     await addRecipe({ data: item }).then((res) => {
       toast.success("Thêm món ăn thành công!");
-      navigate("/recipe/list/"+res.id);
+      navigate("/recipe/list/");
     });
     console.log(item);
   }
@@ -78,10 +78,10 @@ function RecipeAdd() {
   return (
     <div>
       <Header />
-      <section className="h-100 bg-dark">
-      <div className="container h-100">
-        <div className="row d-flex justify-content-center align-items-center h-100">
-          <div className="col col-xl-10">
+      <section className=" bg-dark">
+      <div className="container  ">
+        <div className="row d-flex justify-content-center align-items-center ">
+          <div className="col col-xl-10 my-3">
             <div className="card p-4">
               <div className="row g-0">
                 <div className="col-md-6 col-lg-5 d-none d-md-block">

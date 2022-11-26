@@ -38,13 +38,21 @@ async function addFavoriteRecipe() {
 }const [cookies, setCookie] = useCookies(["user"]);
 const editRecipe = (event)=>{
   event.preventDefault();
-  if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b7ecaf267316d40e330" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
-  {
+  // if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b7ecaf267316d40e330" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
+  // {
+  //   navigate("/error/403");
+  //   return;
+  // } 
+  // else
+  // navigate("/recipe/edit/" + id);
+  if(cookies.privilege != null && cookies.privilege !="null")
+    if(( cookies.privilege.some(el => el.id === "63512b7ecaf267316d40e330")) )
+      navigate("/recipe/edit/" + id);
+     
+  else{
     navigate("/error/403");
     return;
-  } 
-  else
-  navigate("/recipe/edit/" + id);
+  }
 }
 var imageAvatar = [
   "https://th.bing.com/th/id/R.a3baf7f7b1d06e5b0d4ea35b6ad94175?rik=gutA%2fUDP8WXjjA&pid=ImgRaw&r=0",
@@ -57,8 +65,8 @@ var imageAvatar = [
 ];
 const [{}, DeleteData] = useAxios(
   {
-    url: `Recipe/${id}`,
-    method: "DELETE",
+    url: `recipe/delete/${id}`,
+    method: "POST",
   },
   { manual: true }
 );
@@ -71,9 +79,9 @@ const [{}, addFaRe] = useAxios(
 );
 async function deleteRecipe() {
   await DeleteData({ data: id }).then((res) => {
-    toast.success("Xóa địa điểm thành công!");
+    toast.success("Xóa món ăn thành công!");
   });
-  window.location.href = "/";
+  window.location.href = "/recipe/list";
 }
 function split_string(strOrigin, split) {
   let str = strOrigin;

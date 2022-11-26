@@ -21,7 +21,7 @@ function Error403() {
                                             Truy cập không hợp lệ
                                         </h3>
                                         <p style={{ fontSize:'20px' }}>Bạn không đủ quyền truy cập vào trang web</p>
-                                        <a href="/" classname="nav-link" className="btn btn-success btn-lg">Quay lại </a>
+                                        <a href="/"  className=" nav-link btn btn-success btn-lg">Quay lại </a>
 
                                     </div>
                                 </div>
