@@ -37,6 +37,7 @@ import Error403 from "./components/Partial/Error403";
 import CategoryEdit from "./components/AdminHome/category/CategoryEdit";
 import Feedback from "./components/Home/feedback";
 import Aboutus from "./components/Home/aboutus";
+import FilterRecipe from "./components/Recipe/FilterRecipe";
 
 const theme = createTheme({
   palette: {
@@ -80,6 +81,7 @@ function App() {
                 <Route path="/blog/1" element={<Template01 />} />
                 <Route path="/feedback" element={<Feedback />} />
                 <Route path="/aboutus" element={<Aboutus />} />
+                <Route path="/filter" element={<FilterRecipe />} />
                 {/* Show detail recipe */}
                 <Route path="/recipe/list/:id" element={<RecipeDetail/>} />
                 <Route path="/user/:name" element={<ActiveAccount />} />

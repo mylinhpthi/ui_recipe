@@ -18,7 +18,8 @@ const Widget = ({ type }) => {
       data = {
         title: "Tài khoản",
         link: "Xem tất cả",
-        linkUrl:"#",
+        linkUrl:"#",diff:2,
+        amount:99,
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -34,7 +35,8 @@ const Widget = ({ type }) => {
       data = {
         title: "Món ăn",
         link: "Xem tất cả",
-        linkUrl:"#",
+        linkUrl:"#",diff:25,
+        amount:78,
         icon: (
           <LocalDiningIcon
             className="icon"
@@ -50,7 +52,8 @@ const Widget = ({ type }) => {
       data = {
         title: "Tương tác",
         link: "Xem tất cả",
-        linkUrl:"#",
+        linkUrl:"#",diff:12,
+        amount:68,
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -64,6 +67,8 @@ const Widget = ({ type }) => {
         title: "Danh mục",
         link: "Xem chi tiết",
         linkUrl:" #",
+        diff:22,
+        amount:98,
         icon: (
           <AccountBalanceWalletOutlinedIcon
             className="icon"
@@ -84,7 +89,7 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-           {amount}
+           {data.amount}
         </span>
         <Link to={data.linkUrl}><span className="link">{data.link}</span></Link>
         
@@ -92,7 +97,7 @@ const Widget = ({ type }) => {
       <div className="right">
         <div className="percentage positive">
           <KeyboardArrowUpIcon />
-          {diff} %
+          {data.diff} %
         </div>
         {data.icon}
       </div>

@@ -38,10 +38,6 @@ function Home() {
           <Featured />
           <Chart title="Biểu đồ 6 tháng gần đây" aspect={2 / 1} />
         </div>
-        {/* <div className="listContainer">
-          <div className="listTitle">Latest Transactions</div>
-          <Table />
-        </div> */}
       </div>
     </div>
     

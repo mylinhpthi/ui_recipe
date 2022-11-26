@@ -5,8 +5,10 @@ import { AppContext } from "../../AppContext";
 import useAxios from 'axios-hooks';
 import { signOut } from '../../services/firebase.services';
 import { useCookies } from 'react-cookie';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Header() {
+    const dispatch = useDispatch();
 	const [cookies, setCookie, removeCookie] = useCookies(["privilege"]);
 	const [dt, setDt] = useState([]);
 	const [keyword, setKeyword] = useState("");
@@ -16,6 +18,14 @@ function Header() {
 	useEffect(() => {
 		setDt(data);
 	  }, [data]);
+	  const search = (e)=>{
+		e.preventDefault();
+		dispatch({
+			type: 'SEARCH',
+			payload: keyword,
+			});
+			navigate("/filter");
+	  }
 	const logout =(e) =>{
 		e.preventDefault();
 		localStorage.removeItem('user');
@@ -64,7 +74,7 @@ function Header() {
 							<form action="#" className="searchform order-lg-last">
 								<div className="form-group d-flex">
 									<input type="text" className="form-control pl-3" placeholder="Tìm kiếm" onChange={(e) => setKeyword(e.target.value)} />
-									<button type="submit" placeholder="" className="form-control search"><span className="fa fa-search"></span></button>
+									<button onClick={search} placeholder="" className="form-control search"><span className="fa fa-search"></span></button>
 								</div>
 							</form>
 

@@ -38,15 +38,8 @@ const providers = {
 export async function handleAuthError(error){
       await signInWithRedirect(auth, facebookProvider);
       const result = await getRedirectResult(auth);
-    //    if (result) {
-         // This is the signed-in user
          const user = result.user;
          return user;
-    //   return signInWithRedirect(facebookProvider).then((result) => {
-    //     return result.user;
-    // })
-    // }
-    
   };
  
 export function signOut() {

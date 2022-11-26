@@ -64,6 +64,9 @@ a:not([href]):not([tabindex]):focus {
   .searchform {
     width: 300px;
   }
+  .search-form {
+    width: 40vw;
+  }
 }
 
 .searchform .form-control {
@@ -73,23 +76,30 @@ a:not([href]):not([tabindex]):focus {
   color: rgba(0, 0, 0, 0.7) !important;
   font-size: 14px;
 }
+.search-form .form-control {
+  width: calc(100% - 50px);
+  border: none;
+  background: rgba(175, 173, 173, 0.253) !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+  font-size: 14px;
+}
 
-.searchform .form-control::-webkit-input-placeholder {
+.searchform .form-control::-webkit-input-placeholder,.search-form .form-control::-webkit-input-placeholder {
   /* Chrome/Opera/Safari */
   color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.searchform .form-control::-moz-placeholder {
+.searchform .form-control::-moz-placeholder,.search-form .form-control::-moz-placeholder {
   /* Firefox 19+ */
   color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.searchform .form-control:-ms-input-placeholder {
+.searchform .form-control:-ms-input-placeholder,.search-form .form-control:-ms-input-placeholder {
   /* IE 0+ */
   color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.searchform .form-control:-moz-placeholder {
+.searchform .form-control:-moz-placeholder,.search-form .form-control:-moz-placeholder {
   /* Firefox 18- */
   color: rgba(0, 0, 0, 0.7) !important;
 }
@@ -99,8 +109,16 @@ a:not([href]):not([tabindex]):focus {
   height: 40px;
   background: #54b902 !important;
 }
-
+.search-form .search {
+  width: 60px;
+  height: 40px;
+  background: #0e8f02c0 !important;
+}
 .searchform .search span {
+  font-size: 16px;
+  color: #fff;
+}
+.search-form .search span {
   font-size: 16px;
   color: #fff;
 }
