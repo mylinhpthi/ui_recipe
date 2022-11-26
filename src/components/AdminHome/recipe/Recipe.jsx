@@ -32,12 +32,8 @@ const Recipe = () => {
   const navigate = useNavigate();
   const [cookies, setCookie] = useCookies(["privilege"]);
   async function handleDelete(id) {
-    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b7acaf267316d40e32f" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
-    {
-      navigate("/error/403");
-      return;
-    } 
-    console.log(id);
+    console.log(cookies.privilege);
+    if((cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3") && cookies.privilege.some(el => el.id === "63512b83caf267316d40e331")) ){
     let res = await fetch("http://localhost:8093/recipe/delete/" + id, {
       method: "POST",
       headers: {
@@ -49,6 +45,11 @@ const Recipe = () => {
       toast.success("Xóa món ăn thành công!");
     }
     window.location.reload();
+    }else{
+      navigate("/error/403");
+      return;
+    } 
+    
   }
   async function handleClickOpen(id) {
     let res = await fetch("http://localhost:8093/recipe/list/" + id, {

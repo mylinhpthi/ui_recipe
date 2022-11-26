@@ -9,7 +9,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import AcUnitOutlinedIcon from "@mui/icons-material/AcUnitOutlined";
 // import { AppContext } from "../../AppContext";
-import Loading from "D:/HK1 - 2022 - 2023/Java/Practices/ui_recipe/src/components/Partial/Loading";
+import Loading from "D:/HK1 - 2022 - 2023/Java/Project/ui_recipe/src/components/Partial/Loading";
 // import Header from "../Partial/Header";
 
 function CategoryDetail({ id }) {

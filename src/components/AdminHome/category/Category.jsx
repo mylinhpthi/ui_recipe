@@ -36,14 +36,8 @@ const Category = () => {
    const navigate = useNavigate();
     const [cookies, setCookie] = useCookies(["privilege"]);
    async function handleDelete(id) {
-    if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b56caf267316d40e32a" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
-    {
-      navigate("/error/403");
-      return;
-    } 
-
-    console.log(id);
-    let res = await fetch("http://localhost:8093/category/delete/"+id, {
+    if((cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3") && cookies.privilege.some(el => el.id === "63512b56caf267316d40e32a")) ){
+      let res = await fetch("http://localhost:8093/category/delete/"+id, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -55,14 +49,21 @@ const Category = () => {
         toast.success("Xóa danh mục thành công!");
       }
       window.location.reload();
+    } 
+    else{
+      navigate("/error/403");
+      return;
+    }
     }
   function handleClickEdit(id){
-  //   if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b62caf267316d40e32c" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
-  // {
-  //   navigate("/error/403");
-  //   return;
-  // } else
+  if((cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3") && cookies.privilege.some(el => el.id === "63512b62caf267316d40e32c")) ){
     navigate("/admin/category/edit/"+id);
+  } 
+  else{
+    navigate("/error/403");
+    return;
+  }
+    
   }
   async function handleClickOpen(id){
     let res = await fetch("http://localhost:8093/category/list/"+id, {
@@ -77,7 +78,8 @@ const Category = () => {
       if(res)
         setCategory(res);
     setOpen(true);
-    // console.log(id);
+    console.log(id);
+    console.log(res);
     // setId(id);
     
   }
@@ -88,13 +90,14 @@ const Category = () => {
   
 const handleAddPrivilege = (event)=>{
   event.preventDefault();
-  if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "63512b5ccaf267316d40e32b" && el.id === "6354cfc925489097bde657b3" )) || cookies.privilege =="null")
-  {
+  if((cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3") && cookies.privilege.some(el => el.id === "63512b5ccaf267316d40e32b")) ){
+    navigate("/admin/category/add");
+  } 
+  else{
     navigate("/error/403");
     return;
-  } 
-  else
-  navigate("/admin/category/add");
+  }
+  
 }
 
   const handleClose = () => {
@@ -104,7 +107,7 @@ const handleAddPrivilege = (event)=>{
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 300,
       renderCell: (params) => {
         return (
           <div className="cellAction">

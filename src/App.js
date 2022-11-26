@@ -54,50 +54,10 @@ const theme = createTheme({
 });
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  const [currentUser,  setCurrentUser] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useState();
-  const [privilege, setPrivilege] = useState([]);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        user.getIdToken().then((t) => {
-          setToken(t);
-          setIsAuth(true);
-          setCurrentUser(user);
-        });
-      } else {
-        setIsAuth(false);
-        setCurrentUser(null);
-        setPrivilege([]);
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    if (!token) return;
-    const authInterceptor = axios.interceptors.request.use(
-      (config) => {
-        config.headers = {
-          authorization: `Bearer ${token}`,
-        };
-        return config;
-      },
-      (error) => Promise.reject(error)
-    );
-    return () => {
-      axios.interceptors.request.eject(authInterceptor);
-    };
-  }, [token]);
 
   return (
     <div className="App">
-      <ThemeProvider theme={theme}>
-        <AppContext.Provider
-          value={{ isAuth, currentUser, isLoading, setIsLoading, setIsAuth,  setCurrentUser, privilege, setPrivilege}}
-        >
-          
+      <ThemeProvider theme={theme}>    
             <Router>
               <Routes>
                 <Route exact path="/" element={<Hero />} />
@@ -132,7 +92,6 @@ function App() {
               </Routes>
             </Router>
             <Footer />
-          </AppContext.Provider>
       </ThemeProvider>
     </div>
   );

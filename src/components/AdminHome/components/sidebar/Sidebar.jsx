@@ -14,8 +14,10 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { signOut } from "../../../../services/firebase.services";
+import { Cookies } from "react-cookie";
 
 const Sidebar = ({active="TrangChu"}) => {
+  const cookies = new Cookies();
 useEffect(() => {
   console.log(active)
 }, []);
@@ -23,6 +25,8 @@ const navigate = useNavigate();
 const logout =(e) =>{
   e.preventDefault();
   localStorage.removeItem('user');
+  cookies.remove('privilege', { path: '/' });
+  cookies.remove('privilege', { path: '/admin' });
   signOut();
   navigate("/login");
 }
