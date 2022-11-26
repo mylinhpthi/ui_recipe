@@ -17,11 +17,10 @@ function Home() {
   const [cookies, setCookie] = useCookies(["privilege"]);
   const { isLoading, setIsLoading, setCurrentUser, setIsAuth, setPrivilege, privilege } =
   React.useContext(AppContext);
-  useEffect(() => {
-   if((cookies.privilege !="null" && !cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3")) || cookies.privilege =="null")
-    {toast.error("Truy cập không hợp lệ");
-      navigate("/error/403");}
-  }, [cookies])
+  useEffect(() => {                                             
+  //  if(cookies.privilege && !cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3") ){
+  //     navigate("/error/403");}     
+   }, [])
   
   return (
 <div className="home">

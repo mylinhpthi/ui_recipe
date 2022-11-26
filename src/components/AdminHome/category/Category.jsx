@@ -118,7 +118,7 @@ const handleAddPrivilege = (event)=>{
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
-              Xóa
+              XÓA
             </div>
           </div>
         );

@@ -88,7 +88,7 @@ const Recipe = () => {
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
-              Xóa
+              XÓA
             </div>
           </div>
         );
