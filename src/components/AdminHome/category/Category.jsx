@@ -74,12 +74,9 @@ const Category = () => {
         },
       });
       res = await res.json();
-      console.log(res);
       if(res)
         setCategory(res);
     setOpen(true);
-    console.log(id);
-    console.log(res);
     // setId(id);
     
   }

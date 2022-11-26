@@ -25,8 +25,9 @@ function CategoryDetail({ id }) {
   }, [data]);
   useEffect(() => {
     setDt(data);
+    console.log(id);
   }, []);
-  const hasData = dt != null ;
+  const hasData = dt != null && categories != null ;
   return (
     <div>
       {
@@ -37,8 +38,21 @@ function CategoryDetail({ id }) {
           <div className="container">
             <div className="row justify-content-start ">
               <div className="col-lg-3 col-md-6 col-12  mt-4 ">
-                <h5>Danh mục món ăn {cateItem.name}</h5>
+                <h5>Danh mục món ăn </h5>
                 <Divider />
+                <ListItem
+                     disablePadding
+                   >
+                     <ListItemButton>
+                       <ListItemIcon>
+                         <AcUnitOutlinedIcon
+                           color="primary"
+                           fontSize="small"
+                         />
+                       </ListItemIcon>
+                       <ListItemText primary={categories.name} />
+                     </ListItemButton>
+                   </ListItem>
               </div>
               <div className="col-lg-9 col-md-6 col-12  list-recipe">
                 <section className="recipe section" id="diadiem">
@@ -57,7 +71,7 @@ function CategoryDetail({ id }) {
                             rate,
                             index,
                           }) => {
-                            if (category && category.name == cateItem[1]) {
+                            if (category && category.name == categories.name) {
                               return (
                                 <div className="col-lg-3 col-md-6 col-12 ">
                                   <Link to={"/recipe/list/" + id}>
