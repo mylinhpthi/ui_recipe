@@ -20,6 +20,7 @@ function Hero() {
   const navigate = useNavigate();
   useEffect(() => {
     setDt(data);
+    if(cookies.privilege!="null")
     if(cookies.privilege?.some((el) => el.id == "63512b7acaf267316d40e32f")){
       setHasAddRecipe(true);
     }
@@ -201,7 +202,7 @@ function Hero() {
                         index,
                       }) => {
                         return (
-                          <div className="col-lg-3 col-md-6 col-12 ">
+                          <div className="col-md-3 col-sm-6  col-12 ">
                             <Link to={"/recipe/list/" + id}>
                               <div
                                 key={index}
