@@ -6,11 +6,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useCookies } from "react-cookie";
 import useAxios from "axios-hooks";
-import UploadImages from "D:/HK1 - 2022 - 2023/Java/Project/ui_recipe/src/components/Partial/UploadImages";
-import Sidebar from "D:/HK1 - 2022 - 2023/Java/Project/ui_recipe/src/components/AdminHome/components/sidebar/Sidebar";
 import Navbar from "../components/navbar/Navbar";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import Sidebar from "../components/sidebar/Sidebar";
 function UserPrivilege() {
   let { id } = useParams();
   const notify = () => toast("");
