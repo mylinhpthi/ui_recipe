@@ -5,6 +5,7 @@ import Header from "./Header";
 function Error404() {
     return (
         <div>
+            <Header />
             <div className="container" >
                 <section className="page_404" style={{ padding: '40px 0', background: '#fff', fontFamily: '"Arvo", serif' }}>
                     <div className="container">

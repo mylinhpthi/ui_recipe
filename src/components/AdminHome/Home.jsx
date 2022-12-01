@@ -13,15 +13,7 @@ import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 function Home() {
-  const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(["privilege"]);
-  const { isLoading, setIsLoading, setCurrentUser, setIsAuth, setPrivilege, privilege } =
-  React.useContext(AppContext);
-  useEffect(() => {                                             
-  //  if(cookies.privilege && !cookies.privilege.some(el => el.id === "6354cfc925489097bde657b3") ){
-  //     navigate("/error/403");}     
-   }, [])
-  
+
   return (
 <div className="home">
       <Sidebar />

@@ -85,12 +85,12 @@ function App() {
                 {/* Show detail recipe */}
                 <Route path="/recipe/list/:id" element={<RecipeDetail/>} />
                 <Route path="/user/:name" element={<ActiveAccount />} />
-                <Route exact path="/error/404" element={<Error404 />} />
                 <Route exact path="/error/403" element={<Error403 />} />
                 <Route exact path="/new/1st" element={<Template01 />} />
                 <Route exact path="/new/2nd" element={<Template02 />} />
                 <Route exact path="/new/3rd" element={<Template03 />} />
                 <Route exact path="/new/4th" element={<Template04 />} />
+                <Route exact path="/*" element={<Error404 />} />
               </Routes>
             </Router>
             <Footer />
